@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title>LiftWhat? - Russian Squat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LiftWhat? presents the Russian Squat Routine. You better learn to love squats...and pain. The program is great for the offseason.">
+  </head>
+  <body>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/liftApp.js"></script>
+    <script>
+	liftApp.localInit = function(){
+		if (liftApp.ARGV.current_max) {
+			var max = parseInt(liftApp.ARGV.current_max);
+			var unit = liftApp.ARGV.u || 'pounds';
+			var setsReps = [
+				[[6,2],[6,3],[6,2]],
+				[[6,4],[6,2],[6,5]],
+				[[6,2],[6,6],[6,2]],
+				[[5,5],[6,2],[4,4]],
+				[[6,2],[3,3],[6,2]],
+				[[2,2],[6,2],[1,1]]
+			];
+			$container.append('<h4> Current Max is <span class="red">' + max + '</span> ' + unit + '.</h4>');
+			var $weeks = $('<div id="weeks"></div>');
+			for(i=1; i<7; i++) {
+				$weeks.append('<h3 class="break"><span>Week ' + i + '</span></h3>');
+				var $table = $('<table></table>');
+				var $tbody = $('<tbody></tbody>');
+				liftApp.setTableHeader($table);
+
+				if (i<4) {
+
+					for (x=0; x<3; x++){
+						$row = $('<tr></tr>');
+						$row.append('<td><em class="muted">Day ' + parseInt(x+1) + ':</em> Squat</td>');
+						$row.append('<td>' + setsReps[i-1][x][0] + '</td>');
+						$row.append('<td>' + setsReps[i-1][x][1] + '</td>');
+						$row.append('<td>' + parseInt(max * .8) + '</td>');
+						$tbody.append($row);
+					}
+
+				}
+
+				if (i>=4) {
+					var intensity = [
+						[.85, .8, .9],
+						[.8, .95, .8],
+						[1, .8, 1.05]
+					];
+
+					for (x=0; x<3; x++){
+						$row = $('<tr></tr>');
+						$row.append('<td><em class="muted">Day ' + parseInt(x+1) + ':</em> Squat</td>');
+						$row.append('<td>' + setsReps[i-1][x][0] + '</td>');
+						$row.append('<td>' + setsReps[i-1][x][1] + '</td>');
+						$row.append('<td>' + parseInt(max * intensity[i-4][x]) + '</td>');
+						$tbody.append($row);
+					}
+				}
+
+				$table.append($tbody);
+				$weeks.append($table);
+			}
+
+			$container.append($weeks);
+		}
+	};
+    </script>
+  </body>
+</html>

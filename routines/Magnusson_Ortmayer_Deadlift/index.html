@@ -14,10 +14,10 @@
 			var max = parseInt(liftApp.ARGV.target_max);
 			var unit = liftApp.ARGV.u || 'pounds';
 			var difficulty = 0;
-			$container.append('<h4> Current Max is <span class="red">' + max + '</span> ' + unit + '.</h4>');
+			$container.append('<h4> Target Max is <span class="red">' + max + '</span> ' + unit + '.</h4>');
 			var $weeks = $('<div id="weeks"></div>');
 			for(i=1; i<13; i++) {
-				$weeks.append('<h3>Week ' + i + '</h3>');
+				$weeks.append('<h3 class="break"><span>Week ' + i + '</span></h3>');
 				var $table = $('<table></table>');
 				var $tbody = $('<tbody></tbody>');
 
