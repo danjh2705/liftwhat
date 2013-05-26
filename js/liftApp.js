@@ -25,9 +25,18 @@
                 }
             ],
              type: 'Powerlifting'
+            },
+            {name: 'Russian Squat',
+             inputs: [
+                { type: "number",
+                  value: "current_max"
+                }
+             ],
+              type: 'Olympic Weightlifting'
             }
         ],
         types: [
+            'Olympic Weightlifting',
             'Powerlifting'
         ]
     };
