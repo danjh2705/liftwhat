@@ -4,4 +4,5 @@ $(document).ready(function(){
 	$container = $('#container');
 	liftApp.localInit();
 	liftApp.googleAnalytics();
+	liftApp.setFooter();
 });

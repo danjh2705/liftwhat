@@ -59,6 +59,14 @@
         $('#container').prepend($masthead.append($title));
     };
 
+    liftApp.setFooter = function () {
+        if (liftApp.locale != 'Welcome.') {
+            $footer = $('<div id="footer"></div>');
+            $footer.append('<a href="/">Wanna try another?</a>');
+            $('#container').append($footer);
+        }
+    }
+
     liftApp.error = function (type) {
         if (type = 'missing_argv') { recover({status: 404}) }
     };
