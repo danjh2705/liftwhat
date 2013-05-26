@@ -24,9 +24,9 @@
 				if (i == 1) {
 					liftApp.setTableHeader($table);
 					$tbody.append('<tr><td rowspan="4">Deadlift</td></tr>');
-					$tbody.append('<tr><td>4</td><td>4</td><td>' + max * .7 + '</td></tr>');
-					$tbody.append('<tr><td>2</td><td>2</td><td>' + max * .8 + '</td></tr>');
-					$tbody.append('<tr><td>1</td><td>8+</td><td>' + max * .7 + '</td></tr>');
+					$tbody.append('<tr><td>4</td><td>4</td><td>' + parseInt(max * .7) + '</td></tr>');
+					$tbody.append('<tr><td>2</td><td>2</td><td>' + parseInt(max * .8) + '</td></tr>');
+					$tbody.append('<tr><td>1</td><td>8+</td><td>' + parseInt(max * .7) + '</td></tr>');
 				}
 
 				else if (i%4 == 0) {
