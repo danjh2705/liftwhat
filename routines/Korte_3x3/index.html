@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title>LiftWhat? - Korte 3x3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LiftWhat? presents the Korte 3x3 Routine. This is a no-nonsense approach to training that is both brutal and satisfying. Squat, bench, deadlift. That's really it.">
+  </head>
+  <body>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/liftApp.js"></script>
+    <script>
+	liftApp.localInit = function(){
+		if (liftApp.ARGV.current_max_squat && liftApp.ARGV.current_max_bench && liftApp.ARGV.current_max_deadlift) {
+			var squatMax = parseInt(liftApp.ARGV.current_max_squat);
+			var benchMax = parseInt(liftApp.ARGV.current_max_bench);
+			var deadMax  = parseInt(liftApp.ARGV.current_max_deadlift);
+			var unit = liftApp.ARGV.u || 'pounds';
+
+			$container.append('<h4> Current Squat Max is <span class="red">' + squatMax + '</span> ' + unit + '.</h4>');
+			$container.append('<h4> Current Bench Max is <span class="red">' + benchMax + '</span> ' + unit + '.</h4>');
+			$container.append('<h4> Current Deadlift Max is <span class="red">' + deadMax + '</span> ' + unit + '.</h4>');
+			squatMax += 25; benchMax += 10; deadMax += 15;
+			var $weeks = $('<div id="weeks"></div>');
+			var p1Intensity = [.581,.6,.62,.64];
+			var p2Intensity = [.8,.85,.9,.95];
+			for(i=1; i<9; i++) {
+				$weeks.append('<h3 class="break"><span>Week ' + i + '</span></h3>');
+
+				for(x=1; x<4; x++){
+					$weeks.append('<h4>Day ' + x + '</h4>');
+					var $table = $('<table></table>');
+					var $tbody = $('<tbody></tbody>');
+					liftApp.setTableHeader($table);
+
+					if(i<5) {
+
+						$tbody.append('<tr><td>Squat</td><td>5-8</td><td>5</td><td>' + parseInt(squatMax*p1Intensity[i-1]) + '</td></tr>');
+						$tbody.append('<tr><td>Bench</td><td>5-8</td><td>5</td><td>' + parseInt(benchMax*p1Intensity[i-1]) + '</td></tr>');
+						$tbody.append('<tr><td>Deadlift</td><td>5-8</td><td>5</td><td>' + parseInt(deadMax*p1Intensity[i-1]) + '</td></tr>');
+					}
+
+					if(i>=5) {
+						var localX = 4-x;
+						var baseIntensity = .6;
+						var	spikeI 	= p2Intensity[i-5];
+						var spikeSR = ['1-2', 1];
+
+						var squatI, benchI, deadI;
+
+						squatI 	= (1/localX == 1) ? spikeI : baseIntensity;
+						benchI 	= (2/localX == 1) ? spikeI : baseIntensity;
+						deadI 	= (3/localX == 1) ? spikeI : baseIntensity;
+
+						var squatSR, benchSR, deadSR;
+
+						squatSR	= (1/localX == 1) ? spikeSR : [3,3];
+						benchSR	= (2/localX == 1) ? spikeSR : [5,4];
+						deadSR 	= (3/localX == 1) ? spikeSR : [3,3];
+
+						$tbody.append('<tr><td>Squat</td><td>' + squatSR[0] + '</td><td>' + squatSR[1] + '</td><td>' + parseInt(squatMax*squatI) + '</td></tr>');
+						$tbody.append('<tr><td>Bench</td><td>' + benchSR[0] + '</td><td>' + benchSR[1] + '</td><td>' + parseInt(benchMax*benchI) + '</td></tr>');
+						$tbody.append('<tr><td>Deadlift</td><td>' + deadSR[0] + '</td><td>' + deadSR[1] + '</td><td>' + parseInt(deadMax*deadI) + '</td></tr>');
+					}
+
+
+
+					$table.append($tbody);
+					$weeks.append($table);
+
+				}
+			}
+
+			$container.append($weeks);
+		}
+	};
+    </script>
+  </body>
+</html>

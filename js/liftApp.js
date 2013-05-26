@@ -33,6 +33,23 @@
                 }
              ],
               type: 'Olympic Weightlifting'
+            },
+            {name: 'Korte 3x3',
+             inputs: [
+                {
+                  type: "number",
+                  value: "current_max_squat"
+                },
+                {
+                  type: "number",
+                  value: "current_max_bench"
+                },
+                {
+                  type: "number",
+                  value: "current_max_deadlift"
+                }
+             ],
+              type: 'Powerlifting'
             }
         ],
         types: [
@@ -115,6 +132,9 @@
             var retArr = [];
             $(routines.all).each(function(i,v){
                 if (v.type == type) { retArr.push(v); }
+            });
+            retArr.sort(function(a,b) {
+                return a.name > b.name;
             });
             return retArr;
         }
