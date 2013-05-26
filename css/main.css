@@ -1,0 +1,59 @@
+body { font-size: 1.1em; color: #444; }
+
+.container.narrow {
+	max-width: 700px;
+	margin: 10px auto;
+}
+
+.error {
+	width: 400px;
+	margin: 10px auto;
+}
+
+.red { color: red; }
+
+h1 a, h1 a:hover, h1 a:visited { color: #444; }
+
+h3 { margin-top: 100px; position: relative; }
+h3:first-child { margin-top: 50px; }
+h3.break:before {
+	content: '';
+	display: block;
+	width: 100%;
+	height: 1px;
+	background-color: rgb(255,225,225);
+	margin-bottom: -20px;
+}
+h3.break span { background-color: white; padding-right: 10px; }
+
+#form {	margin-top: 40px; }
+
+.input, #button_container { margin-top: 20px; }
+
+select, input { width: 100%; }
+input { padding: 10px 0; }
+
+table { width: 100%; }
+
+table thead th { color: white; text-align: left; padding: 8px; }
+table thead tr:first-child { background-color: red; }
+
+table tbody tr:nth-child(even), table tbody td[rowspan] { background-color: rgb(255,235,235); }
+
+table tbody td { 
+	border-top: 1px solid rgb(255,200,200);
+	padding: 8px;
+	vertical-align: middle;
+	text-align: right;
+}
+table tbody td:first-child { text-align: left; }
+table tbody td.group-instructions { text-align: center; background-color: white; }
+table tbody td.group-instructions span{
+	font-style: italic;
+	padding: 5px 20px;
+	background-color: red;
+	border-radius: 4px;
+	color: white;
+}
+
+table tbody td[rowspan] { vertical-align: middle; text-align: center; }

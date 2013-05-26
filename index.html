@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LiftWhat? - Welcome.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LiftWhat? provides you easy access to the most popular training routines for less thinking, more lifting.">
+  </head>
+  <body>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/liftApp.js"></script>
+    <script>
+    liftApp.localInit = function(){
+      var $p1 = $('<p></p>').addClass('lead'), $p2 = $('<p></p>');
+      $p1.html('Lift What? is a collection of kick ass lifting programs ' + liftApp.fetchSlogan() + '.');
+      $p2.html('<small>Just pick a program, enter your info, and be sure to bookmark the result for less thinking, more lifting while <em>slaying it</em> in the gym!</small>');
+      $container.append($p1).append($p2);
+
+      var $form = $('<div id="form"></div>');
+      var $select = $('<select></select>');
+      var $inputs = $('<div id="inputs"></div>');
+      var $buttonContainer = $('<div id="button_container"></div>');
+      $select.append('<option value="no">Select a program...</option>')
+      
+      var types = liftApp.fetchRoutineTypes().sort();
+
+      $(types).each(function(i,type){
+        var $optionGroup = $('<optgroup label="' + type + '"></optgroup>')
+        var routines = liftApp.fetchRoutinesByType(type);
+        $(routines).each(function(i, routine){
+          $optionGroup.append('<option value="' + liftApp.nameToFile(routine.name) + '">' + routine.name + '</option>');
+        });
+        $select.append($optionGroup);
+      });
+
+      $select.bind('change', function(e){
+        $('#inputs').empty();
+        var selectedFile = $(e.target).find('option:selected')[0].value;
+        var selectedName = liftApp.fileToName(selectedFile);
+        if (selectedName != 'no') {
+          inputs = liftApp.fetchRoutineInputs(selectedName);
+          $(inputs).each(function(i,input){
+            var $input = $('<div class="input"></div>');
+            $input.append('<label for="' + input.value + '">' + liftApp.valueToLabel(input.value) + '</label>');
+            $select = liftApp.buildWeightSelector();
+            $select.attr('id', input.value);
+            $input.append($select);
+            $('#inputs').append($input);
+            var $button = $('<button id="run">Get AFTER it!</button>').addClass('btn btn-large btn-block btn-danger').click(function(e){
+                $(e.target).attr('disabled', 'disabled');
+                var url = liftApp.fetchRoot();
+                url += ('routines/' + selectedFile + '/?');
+                $('.input select').each(function(i, select){
+                  var key   = $(select).attr('id');
+                  var value = $(select).find('option:selected').val();
+                  url += (key + '=' + value);
+                  if (i < $('.input select').length - 1) { url += '&' }
+                });
+                window.location.assign(url);
+            });
+            $('#button_container').html($button);
+          });
+        }
+      });
+
+      $form.append($select);
+      $form.append($inputs);
+      $form.append($buttonContainer);
+
+      $container.append($form);
+    };
+    </script>
+  </body>
+</html>

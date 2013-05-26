@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title>LiftWhat? - Magnusson Ortmayer Deadlift</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LiftWhat? presents the Magnusson Ortmayer Deadlift Routine. Train the way Coan did. Oh, and Phillipi is no slouch, either.">
+  </head>
+  <body>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/liftApp.js"></script>
+    <script>
+	liftApp.localInit = function(){
+		if (liftApp.ARGV.target_max) {
+			var max = parseInt(liftApp.ARGV.target_max);
+			var unit = liftApp.ARGV.u || 'pounds';
+			var difficulty = 0;
+			$container.append('<h4> Current Max is <span class="red">' + max + '</span> ' + unit + '.</h4>');
+			var $weeks = $('<div id="weeks"></div>');
+			for(i=1; i<13; i++) {
+				$weeks.append('<h3>Week ' + i + '</h3>');
+				var $table = $('<table></table>');
+				var $tbody = $('<tbody></tbody>');
+
+				if (i == 1) {
+					liftApp.setTableHeader($table);
+					$tbody.append('<tr><td rowspan="4">Deadlift</td></tr>');
+					$tbody.append('<tr><td>4</td><td>4</td><td>' + max * .7 + '</td></tr>');
+					$tbody.append('<tr><td>2</td><td>2</td><td>' + max * .8 + '</td></tr>');
+					$tbody.append('<tr><td>1</td><td>8+</td><td>' + max * .7 + '</td></tr>');
+				}
+
+				else if (i%4 == 0) {
+					$tbody.append('<tr><td>Do something awesome other than deadlifting.</td></tr>');
+				}
+
+				else {
+					liftApp.setTableHeader($table);
+					var incrementer = (unit == 'pounds') ? 10 : 5;
+					difficulty = (i == 3 || i == 6 || i == 7 || i == 10 || i == 11) ? difficulty + incrementer : difficulty;
+					$tbody.append('<tr><td rowspan="5">Deadlift</td></tr>');
+					$tbody.append('<tr><td>4</td><td>4</td><td>' + parseInt((max * .7) + difficulty) + '</td></tr>');
+					$tbody.append('<tr><td>1</td><td>2</td><td>' + parseInt((max * .8) + difficulty) + '</td></tr>');
+					$tbody.append('<tr><td>1</td><td>2</td><td>' + parseInt((max * .9) + difficulty) + '</td></tr>');
+					$tbody.append('<tr><td>1</td><td>8+</td><td>' + parseInt((max * .7) + difficulty) + '</td></tr>');
+				}
+				$table.append($tbody);
+				$weeks.append($table);
+			}
+
+			$container.append($weeks);
+		}
+	};
+    </script>
+  </body>
+</html>

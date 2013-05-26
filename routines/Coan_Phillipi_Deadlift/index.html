@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title>LiftWhat? - Coan Phillipi Deadlift</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LiftWhat? presents the Coan Phillipi Deadlift Routine. This brutal lifting program is sure to increase your PR.">
+  </head>
+  <body>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/liftApp.js"></script>
+    <script>
+	liftApp.localInit = function(){
+		if (liftApp.ARGV.current_max && liftApp.ARGV.target_max) {
+			var currentMax 	= parseInt(liftApp.ARGV.current_max);
+			var targetMax 	= parseInt(liftApp.ARGV.target_max);
+			var unit = liftApp.ARGV.u || 'pounds';
+			$container.append('<h4> Current Max is <span class="red">' + currentMax + '</span> ' + unit + '.</h4>');
+			$container.append('<h4> Target Max is <span class="red">' + targetMax + '</span> ' + unit + '.</h4>');
+			$container.append('<h4> An increase of <span class="red">' + Math.round(((targetMax/currentMax)-1)*10000)/100 + '%</span>.</h4>');
+			var $weeks = $('<div id="weeks"></div>');
+			for(i=1; i<11; i++) {
+				$weeks.append('<h3 class="break"><span>Week ' + i + '</span></h3>');
+				var $table = $('<table></table>');
+				var $tbody = $('<tbody></tbody>');
+				liftApp.setTableHeader($table);
+				var incrementer = .05;
+				if(i<5) {
+					$tbody.append('<tr><td>Deadlift</td><td>1</td><td>2</td><td>' + parseInt(targetMax*(.85+incrementer*(i-1))) + '</td></tr>');
+					$tbody.append('<tr><td>Speed Deadlift</td><td>8</td><td>3</td><td>' + parseInt(targetMax*(.65+incrementer*(i-1))) + '</td></tr>');
+					$tbody.append('<tr><td class="group-instructions" colspan="4"><span>Three circuits of:</span></td></tr>');
+					$tbody.append('<tr><td>Stiff Leg Deadlift</td><td>1</td><td>8</td><td><em class="muted">Feel it out.</em></td></tr>');
+					$tbody.append('<tr><td>Bent Over Rows</td><td>1</td><td>8</td><td><em class="muted">Feel it out.</em></td></tr>');
+					$tbody.append('<tr><td>Suppinated (underhand) Lat Pulldown</td><td>1</td><td>8</td><td><em class="muted">Feel it out.</em></td></tr>');
+					$tbody.append('<tr><td>Arched Back Good Mornings</td><td>1</td><td>8</td><td><em class="muted">Feel it out.</em></td></tr>');
+				}
+
+				else if (i<9) {
+					$tbody.append('<tr><td>Deadlift</td><td>1</td><td>2</td><td>' + parseInt(targetMax*(.90+incrementer*(i-5))) + '</td></tr>');
+					$tbody.append('<tr><td>Speed Deadlift</td><td>3</td><td>3</td><td>' + parseInt(targetMax*(.65+incrementer*(i-5))) + '</td></tr>');
+					$tbody.append('<tr><td>Power Shrug</td><td>3</td><td>5</td><td>' + parseInt(currentMax*(.60+incrementer*(i-5))) + '</td></tr>');
+					$tbody.append('<tr><td>Stiff Leg Deadlift</td><td>3</td><td>5</td><td><em class="muted">Feel it out.</em></td></tr>');
+					$tbody.append('<tr><td>Bent Over Rows</td><td>3</td><td>5</td><td><em class="muted">Feel it out.</em></td></tr>');
+					$tbody.append('<tr><td>Suppinated (underhand) Lat Pulldown</td><td>3</td><td>5</td><td><em class="muted">Feel it out.</em></td></tr>');
+					$tbody.append('<tr><td>Arched Back Good Mornings</td><td>3</td><td>5</td><td><em class="muted">Feel it out.</em></td></tr>');
+				}
+
+				else if (i==9) {
+					$tbody.append('<tr><td>Deadlift</td><td>1</td><td>1</td><td>' + parseInt(targetMax*.975) + '</td></tr>');
+					$tbody.append('<tr><td>Speed Deadlift</td><td>2</td><td>3</td><td>' + parseInt(targetMax*.70) + '</td></tr>');
+					$tbody.append('<tr><td>Power Shrug</td><td>2</td><td>5</td><td>' + parseInt(currentMax*.75) + '</td></tr>');
+					$tbody.append('<tr><td>Stiff Leg Deadlift</td><td>2</td><td>5</td><td><em class="muted">Feel it out.</em></td></tr>');
+				}
+
+				else {
+					$tbody.append('<tr><td>Deadlift</td><td>1</td><td>1</td><td>' + targetMax + '</td></tr>');
+					$tbody.append('<tr><td>Speed Deadlift</td><td>2</td><td>3</td><td>' + parseInt(targetMax*.60) + '</td></tr>');
+				}
+
+				$table.append($tbody);
+				$weeks.append($table);
+			}
+
+			$container.append($weeks);
+
+		}
+	};
+	</script>
+  </body>
+</html>
