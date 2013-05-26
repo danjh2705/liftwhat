@@ -29,9 +29,11 @@ h3.break span { background-color: white; padding-right: 10px; }
 #form {	margin-top: 40px; }
 
 .input, #button_container { margin-top: 20px; }
+.input label { font-size: 1.2em; }
 
 select, input { width: 100%; }
 input { padding: 10px 0; }
+select { height: 40px; font-size: 1.1em; }
 
 table { width: 100%; }
 
