@@ -32,7 +32,7 @@
         ]
     };
 
-    liftApp.name    = "Lift What?";
+    liftApp.name    = "LiftWhat?";
     liftApp.locale  = getLocale();
     liftApp.build   = buildIncludes();
     liftApp.ARGV    = getKeyValues();
