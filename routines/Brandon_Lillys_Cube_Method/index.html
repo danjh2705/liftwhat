@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title>LiftWhat? - Korte 3x3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LiftWhat? presents the Korte 3x3 Routine. This is a no-nonsense approach to training that is both brutal and satisfying. Squat, bench, deadlift. That's really it.">
+  </head>
+  <body>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/liftApp.js"></script>
+    <script>
+	liftApp.localInit = function(){
+		if (liftApp.ARGV.current_max_squat && liftApp.ARGV.current_max_bench && liftApp.ARGV.current_max_deadlift) {
+			var squatMax = parseInt(liftApp.ARGV.current_max_squat);
+			var benchMax = parseInt(liftApp.ARGV.current_max_bench);
+			var deadMax  = parseInt(liftApp.ARGV.current_max_deadlift);
+			var day = {'Heavy':[
+				{ percent: .8,
+				  sets: 5,
+				  reps: 2
+				},
+				{ percent: .85,
+				  sets: 3,
+				  reps: 2
+				},
+				{ percent: [.9,.925,.95],
+				  sets: 1,
+				  reps: 1
+				 }
+			],'Repitition':[
+				{ percent: .7,
+				  sets: 1,
+				  reps: 8
+				},
+				{ percent: .8,
+				  sets: 1,
+				  reps: 6
+				},
+				{ percent: .85,
+				  sets: 1,
+				  reps: 2
+				 }
+			],'Explosive':[
+				{ percent: .6,
+				  sets: 8,
+				  reps: 3
+				},
+				{ percent: .65,
+				  sets: 6,
+				  reps: 2
+				},
+				{ percent: .7,
+				  sets: 5,
+				  reps: 2
+				 }
+			]};
+
+			var dayOrder = ['Heavy', 'Repitition', 'Explosive'];
+			var movements = ['Deadlift', 'Bench', 'Squat'];
+			dayOrder = dayOrder.concat(dayOrder).concat(dayOrder).concat(dayOrder);
+
+			var unit = liftApp.ARGV.u || 'pounds';
+
+			$container.append('<h4> Current Squat Max is <span class="red">' + squatMax + '</span> ' + unit + '.</h4>');
+			$container.append('<h4> Current Bench Max is <span class="red">' + benchMax + '</span> ' + unit + '.</h4>');
+			$container.append('<h4> Current Deadlift Max is <span class="red">' + deadMax + '</span> ' + unit + '.</h4>');
+
+			squatMax *= .95; benchMax *= .95; deadMax *= .95; //Adjust maxes per rec
+			var currentScheme = 0;
+
+			var $weeks = $('<div id="weeks"></div>');
+
+
+			for(i=1; i<11; i++) {
+				$weeks.append('<h3 class="break"><span>Week ' + i + '</span></h3>');
+				if (i==4 || i==7) { currentScheme++; }
+
+				for(x=1; x<5; x++) {
+
+					var $table = $('<table></table>');
+					var $tbody = $('<tbody></tbody>');
+					liftApp.setTableHeader($table);
+					var doWhat;
+
+					if (x<4) { 
+						doWhat = ' - ' + dayOrder[(x + (i-1)) - 1];
+						var $row = $('<tr></tr>');
+						$row.append('<td>' + movements[x-1] + '</td>');
+
+						if (i<7) {
+
+						$row.append('<td>' + day[dayOrder[(x + (i-1)) - 1]][currentScheme].sets + '</td>');
+						$row.append('<td>' + day[dayOrder[(x + (i-1)) - 1]][currentScheme].reps + '</td>');
+						$row.append('<td>' + day[dayOrder[(x + (i-1)) - 1]][currentScheme].percent + '</td>');
+						$tbody.append($row);
+						
+
+						}
+						else {
+							if (dayOrder[(x + (i-1)) - 1] != 'Heavy') {
+								$row.append('<td>' + day[dayOrder[(x + (i-1)) - 1]][currentScheme].sets + '</td>');
+								$row.append('<td>' + day[dayOrder[(x + (i-1)) - 1]][currentScheme].reps + '</td>');
+								$row.append('<td>' + day[dayOrder[(x + (i-1)) - 1]][currentScheme].percent + '</td>');
+								$tbody.append($row);
+							}
+							else {
+								for (z=0;z<day[dayOrder[(x + (i-1)) - 1]][currentScheme].percent.length; z++) {
+									$row = $('<tr></tr>');
+									$row.append('<td>' + movements[x-1] + '</td>');
+									$row.append('<td>' + day[dayOrder[(x + (i-1)) - 1]][currentScheme].sets + '</td>');
+									$row.append('<td>' + day[dayOrder[(x + (i-1)) - 1]][currentScheme].reps + '</td>');
+									$row.append('<td>' + day[dayOrder[(x + (i-1)) - 1]][currentScheme].percent[z] + '</td>');
+									$tbody.append($row);
+								}
+							}
+						}
+					}
+					else {
+						doWhat = ' - Bodybuilding';
+					}
+
+					$table.append($tbody);
+
+					$weeks.append('<h4>Day ' + x.toString() + doWhat + '</h4>');
+					$weeks.append($table);
+
+
+
+				}
+
+			}
+
+			$container.append($weeks);
+		}
+	};
+    </script>
+  </body>
+</html>
