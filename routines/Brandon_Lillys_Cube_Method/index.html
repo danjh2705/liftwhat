@@ -57,6 +57,10 @@
 
 			var dayOrder = ['Heavy', 'Repitition', 'Explosive'];
 			var movements = ['Deadlift', 'Bench', 'Squat'];
+			var benchMovements = ['Floor Press', '2 Board Press', 'Bench Press'];
+			var deadliftMovements = ['1" Deficit Deadlift','Deadlift off 2" blocks', 'Deadlift off 4" blocks'];
+			var bodyBuildingBase = ['Military Press','Bicep Curl','Calf Raise'];
+
 			dayOrder = dayOrder.concat(dayOrder).concat(dayOrder).concat(dayOrder);
 
 			var unit = liftApp.ARGV.u || 'pounds';
@@ -66,14 +70,16 @@
 			$container.append('<h4> Current Deadlift Max is <span class="red">' + deadMax + '</span> ' + unit + '.</h4>');
 
 			squatMax *= .95; benchMax *= .95; deadMax *= .95; //Adjust maxes per rec
-			var currentScheme = 0;
+			var maxArray = [deadMax, benchMax, squatMax];
+			var currentScheme = 0, movementRotator = -1, deadliftRotator = 0;
 
 			var $weeks = $('<div id="weeks"></div>');
 
 
 			for(i=1; i<11; i++) {
 				$weeks.append('<h3 class="break"><span>Week ' + i + '</span></h3>');
-				if (i==4 || i==7) { currentScheme++; }
+				if (i==4 || i==7) { currentScheme++; deadliftRotator++; }
+				movementRotator = (movementRotator < 2) ? movementRotator + 1 : 0;
 
 				for(x=1; x<5; x++) {
 
@@ -85,13 +91,27 @@
 					if (x<4) { 
 						doWhat = ' - ' + dayOrder[(x + (i-1)) - 1];
 						var $row = $('<tr></tr>');
-						$row.append('<td>' + movements[x-1] + '</td>');
+						var movement;
+
+						switch(movements[x-1]) {
+							case 'Bench':
+								movement = benchMovements[movementRotator];
+								break;
+							case 'Deadlift':
+								movement = (dayOrder[(x + (i-1)) - 1] == 'Heavy') ? deadliftMovements[deadliftRotator] : movements[x-1]; 
+								break;
+							default:
+								movement = movements[x-1];
+								break;
+						}
+
+						$row.append('<td>' + movement + '</td>');
 
 						if (i<7) {
 
 						$row.append('<td>' + day[dayOrder[(x + (i-1)) - 1]][currentScheme].sets + '</td>');
 						$row.append('<td>' + day[dayOrder[(x + (i-1)) - 1]][currentScheme].reps + '</td>');
-						$row.append('<td>' + day[dayOrder[(x + (i-1)) - 1]][currentScheme].percent + '</td>');
+						$row.append('<td>' + parseInt(day[dayOrder[(x + (i-1)) - 1]][currentScheme].percent * maxArray[x-1]) + '</td>');
 						$tbody.append($row);
 						
 
@@ -100,16 +120,16 @@
 							if (dayOrder[(x + (i-1)) - 1] != 'Heavy') {
 								$row.append('<td>' + day[dayOrder[(x + (i-1)) - 1]][currentScheme].sets + '</td>');
 								$row.append('<td>' + day[dayOrder[(x + (i-1)) - 1]][currentScheme].reps + '</td>');
-								$row.append('<td>' + day[dayOrder[(x + (i-1)) - 1]][currentScheme].percent + '</td>');
+								$row.append('<td>' + parseInt(day[dayOrder[(x + (i-1)) - 1]][currentScheme].percent * maxArray[x-1]) + '</td>');
 								$tbody.append($row);
 							}
 							else {
 								for (z=0;z<day[dayOrder[(x + (i-1)) - 1]][currentScheme].percent.length; z++) {
 									$row = $('<tr></tr>');
-									$row.append('<td>' + movements[x-1] + '</td>');
+									$row.append('<td>' + movement + '</td>');
 									$row.append('<td>' + day[dayOrder[(x + (i-1)) - 1]][currentScheme].sets + '</td>');
 									$row.append('<td>' + day[dayOrder[(x + (i-1)) - 1]][currentScheme].reps + '</td>');
-									$row.append('<td>' + day[dayOrder[(x + (i-1)) - 1]][currentScheme].percent[z] + '</td>');
+									$row.append('<td>' + parseInt(day[dayOrder[(x + (i-1)) - 1]][currentScheme].percent[z] * maxArray[x-1]) + '</td>');
 									$tbody.append($row);
 								}
 							}
@@ -117,6 +137,14 @@
 					}
 					else {
 						doWhat = ' - Bodybuilding';
+						$(bodyBuildingBase).each(function(i,bb){
+							$row = $('<tr></tr>');
+							$row.append('<td>' + bb + '</td>');
+							$row.append('<td>Get some!</td>');
+							$row.append('<td>Get some!</td>');
+							$row.append('<td>Get some!</td>');
+							$tbody.append($row);
+						});
 					}
 
 					$table.append($tbody);

@@ -50,6 +50,65 @@
                 }
              ],
               type: 'Powerlifting'
+            },
+            {name: 'Brandon Lillys Cube Method',
+             inputs: [
+                {
+                  type: "number",
+                  value: "current_max_squat"
+                },
+                {
+                  type: "number",
+                  value: "current_max_bench"
+                },
+                {
+                  type: "number",
+                  value: "current_max_deadlift"
+                },
+                {
+                  type: "multiselect",
+                  value: "squat_and_deadlift_assistance",
+                  options: [
+                    'Front Squat',
+                    'Olympic Squat',
+                    'Leg Press',
+                    'Lunges',
+                    'Stiff Leg Deadlifts',
+                    'Leg Extensions',
+                    'Leg Curls',
+                    'Good Mornings',
+                    'Snatch Grip Deadlifts',
+                    'Barbell Rows',
+                    'Dumbbell Rows',
+                    'Lat Pulldows',
+                    'Chest Supported Rows',
+                    'Shrugs',
+                    'Abs',
+                    'Glute Ham Raise',
+                    'Pullups'
+                  ]
+                },{
+                  type: "multiselect",
+                  value: "bench_assistance",
+                  options: [
+                    'Close Grip Bench',
+                    'Tricep Pushdown',
+                    'Kaz Presses',
+                    'Military Presses',
+                    'Bicep Curls',
+                    'Shoulder Front or Side Raise',
+                    'Upright Row',
+                    'Abs',
+                    'Forearm Rolls',
+                    'Pec Flyes',
+                    'Fat Bar Bench',
+                    'Push Ups',
+                    'Dips',
+                    'Incline Press'
+                  ]
+                }
+             ],
+              type: 'Powerlifting'
             }
         ],
         types: [
