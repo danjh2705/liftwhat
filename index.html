@@ -27,7 +27,7 @@
         var $optionGroup = $('<optgroup label="' + type + '"></optgroup>')
         var routines = liftApp.fetchRoutinesByType(type);
         $(routines).each(function(i, routine){
-          if (routine.name != 'Brandon_Lillys_Cube_Method') { //Not ready.
+          if (routine.name != 'Brandon Lillys Cube Method') { //Not ready.
             $optionGroup.append('<option value="' + liftApp.nameToFile(routine.name) + '">' + routine.name + '</option>');
           }
         });
