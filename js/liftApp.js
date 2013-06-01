@@ -67,7 +67,7 @@
                 },
                 {
                   type: "multiselect",
-                  value: "squat_and_deadlift_assistance",
+                  value: "squat_assistance",
                   options: [
                     'Front Squat',
                     'Olympic Squat',
@@ -105,6 +105,28 @@
                     'Push Ups',
                     'Dips',
                     'Incline Press'
+                  ]
+                },{
+                  type: "multiselect",
+                  value: "deadlift_assistance",
+                  options: [
+                    'Front Squat',
+                    'Olympic Squat',
+                    'Leg Press',
+                    'Lunges',
+                    'Stiff Leg Deadlifts',
+                    'Leg Extensions',
+                    'Leg Curls',
+                    'Good Mornings',
+                    'Snatch Grip Deadlifts',
+                    'Barbell Rows',
+                    'Dumbbell Rows',
+                    'Lat Pulldows',
+                    'Chest Supported Rows',
+                    'Shrugs',
+                    'Abs',
+                    'Glute Ham Raise',
+                    'Pullups'
                   ]
                 }
              ],
@@ -156,9 +178,30 @@
     };
 
     liftApp.valueToLabel = function (value) {
-        value = value.charAt(0).toUpperCase() + value.slice(1);
+        var value = value.charAt(0).toUpperCase() + value.slice(1);
         return value.split('_').join(' ');
     };
+
+    liftApp.URLArrayToArray = function (string) {
+        var retArr = [];
+        string = string.split(',');
+        $(string).each(function(i,v){
+            v = v.split('/')[0]
+            retArr.push(v.split('%20').join(' '));
+        });
+        return retArr;
+    }
+
+    liftApp.URLArrayToCommaList = function (string) {
+        var retStr = [];
+        string = string.split(',');
+        $(string).each(function(i,v){
+            v = v.split('/')[0];
+            if (v!="") { retStr.push(v.split('%20').join(' ')); }
+        });
+        spacer = function(word) { return word = ' ' + word; }
+        return retStr.map(spacer);
+    }
 
     liftApp.setTableHeader = function ($table) {
         var $thead = $('<thead></thead>');

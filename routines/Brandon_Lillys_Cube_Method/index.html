@@ -3,7 +3,7 @@
   <head>
   	<title>LiftWhat? - Korte 3x3</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="LiftWhat? presents the Korte 3x3 Routine. This is a no-nonsense approach to training that is both brutal and satisfying. Squat, bench, deadlift. That's really it.">
+    <meta name="description" content="LiftWhat? presents Brandon Lilly's Cube Method. This is a meat and potatoes, back to the basics routine that is moderate in volume and high in attitude.">
   </head>
   <body>
     <script src="../../js/jquery.min.js"></script>
@@ -14,6 +14,15 @@
 			var squatMax = parseInt(liftApp.ARGV.current_max_squat);
 			var benchMax = parseInt(liftApp.ARGV.current_max_bench);
 			var deadMax  = parseInt(liftApp.ARGV.current_max_deadlift);
+			var squatAss = liftApp.ARGV.squat_assistance || [];
+			var benchAss = liftApp.ARGV.bench_assistance || [];
+			var deadAss  = liftApp.ARGV.deadlift_assistance || [];
+			var assistance = {
+				Squat: liftApp.URLArrayToCommaList(squatAss),
+				Bench: liftApp.URLArrayToCommaList(benchAss),
+				Deadlift: liftApp.URLArrayToCommaList(deadAss)
+			};
+
 			var day = {'Heavy':[
 				{ percent: .8,
 				  sets: 5,
@@ -65,9 +74,15 @@
 
 			var unit = liftApp.ARGV.u || 'pounds';
 
+			$container.append('<p class="description">So this is a best attempt at giving you an easy to digest template for the Cube. You <em>really</em> need to <a target="_blank" href="http://www.jtsstrength.com/store/">buy and read Brandon\'s book</a> to put this to full use. Do it!</p>');
+
 			$container.append('<h4> Current Squat Max is <span class="red">' + squatMax + '</span> ' + unit + '.</h4>');
 			$container.append('<h4> Current Bench Max is <span class="red">' + benchMax + '</span> ' + unit + '.</h4>');
 			$container.append('<h4> Current Deadlift Max is <span class="red">' + deadMax + '</span> ' + unit + '.</h4>');
+			$container.append('<h4>Using the following as assitance:</h4>');
+			$container.append('<p><b>For squat:</b> ' + liftApp.URLArrayToCommaList(squatAss) + '.</p>');
+			$container.append('<p><b>For bench:</b>' + liftApp.URLArrayToCommaList(benchAss) + '.</p>');
+			$container.append('<p><b>For deadlift:</b>' + liftApp.URLArrayToCommaList(deadAss) + '.</p>');
 
 			squatMax *= .95; benchMax *= .95; deadMax *= .95; //Adjust maxes per rec
 			var maxArray = [deadMax, benchMax, squatMax];
@@ -114,7 +129,6 @@
 						$row.append('<td>' + parseInt(day[dayOrder[(x + (i-1)) - 1]][currentScheme].percent * maxArray[x-1]) + '</td>');
 						$tbody.append($row);
 						
-
 						}
 						else {
 							if (dayOrder[(x + (i-1)) - 1] != 'Heavy') {
@@ -140,12 +154,21 @@
 						$(bodyBuildingBase).each(function(i,bb){
 							$row = $('<tr></tr>');
 							$row.append('<td>' + bb + '</td>');
-							$row.append('<td>Get some!</td>');
-							$row.append('<td>Get some!</td>');
+							$row.append('<td>2 - 4</td>');
+							$row.append('<td>5 - 50</td>');
 							$row.append('<td>Get some!</td>');
 							$tbody.append($row);
 						});
 					}
+
+					$(assistance[movements[x-1]]).each(function(j, move){
+						$row = $('<tr></tr>');
+						$row.append('<td>' + move + '</td>');
+						$row.append('<td>2 - 4</td>');
+						$row.append('<td>5 - 50</td>');
+						$row.append('<td>Get some!</td>');
+						$tbody.append($row);
+					});
 
 					$table.append($tbody);
 

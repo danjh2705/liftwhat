@@ -49,7 +49,7 @@
               if(input.type=='multiselect') {
                 $select.attr('multiple','multiple');
                 $(input.options).each(function(i,option){
-                  $select.append('<option value =' + option + '>' + option + '</option>');
+                  $select.append('<option value ="' + option + '"">' + option + '</option>');
                 });
               }
 
@@ -67,8 +67,16 @@
             var url = liftApp.fetchRoot();
             url += ('routines/' + selectedFile + '/?');
             $('.input select').each(function(i, select){
-              var key   = $(select).attr('id');
-              var value = $(select).find('option:selected').val();
+              var key = $(select).attr('id');
+              if ($(select).attr('multiple')) {
+                var value = [];
+                $(select).find('option:selected').each(function(x,option){
+                  value.push($(option).val()+',');
+                });
+              }
+              else {
+                var value = $(select).find('option:selected').val();
+              }
               url += (key + '=' + value);
               if (i < $('.input select').length - 1) { url += '&' }
             });
