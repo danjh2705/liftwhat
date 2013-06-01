@@ -50,6 +50,87 @@
                 }
              ],
               type: 'Powerlifting'
+            },
+            {name: 'Brandon Lillys Cube Method',
+             inputs: [
+                {
+                  type: "number",
+                  value: "current_max_squat"
+                },
+                {
+                  type: "number",
+                  value: "current_max_bench"
+                },
+                {
+                  type: "number",
+                  value: "current_max_deadlift"
+                },
+                {
+                  type: "multiselect",
+                  value: "squat_assistance",
+                  options: [
+                    'Front Squat',
+                    'Olympic Squat',
+                    'Leg Press',
+                    'Lunges',
+                    'Stiff Leg Deadlifts',
+                    'Leg Extensions',
+                    'Leg Curls',
+                    'Good Mornings',
+                    'Snatch Grip Deadlifts',
+                    'Barbell Rows',
+                    'Dumbbell Rows',
+                    'Lat Pulldows',
+                    'Chest Supported Rows',
+                    'Shrugs',
+                    'Abs',
+                    'Glute Ham Raise',
+                    'Pullups'
+                  ]
+                },{
+                  type: "multiselect",
+                  value: "bench_assistance",
+                  options: [
+                    'Close Grip Bench',
+                    'Tricep Pushdown',
+                    'Kaz Presses',
+                    'Military Presses',
+                    'Bicep Curls',
+                    'Shoulder Front or Side Raise',
+                    'Upright Row',
+                    'Abs',
+                    'Forearm Rolls',
+                    'Pec Flyes',
+                    'Fat Bar Bench',
+                    'Push Ups',
+                    'Dips',
+                    'Incline Press'
+                  ]
+                },{
+                  type: "multiselect",
+                  value: "deadlift_assistance",
+                  options: [
+                    'Front Squat',
+                    'Olympic Squat',
+                    'Leg Press',
+                    'Lunges',
+                    'Stiff Leg Deadlifts',
+                    'Leg Extensions',
+                    'Leg Curls',
+                    'Good Mornings',
+                    'Snatch Grip Deadlifts',
+                    'Barbell Rows',
+                    'Dumbbell Rows',
+                    'Lat Pulldows',
+                    'Chest Supported Rows',
+                    'Shrugs',
+                    'Abs',
+                    'Glute Ham Raise',
+                    'Pullups'
+                  ]
+                }
+             ],
+              type: 'Powerlifting'
             }
         ],
         types: [
@@ -97,9 +178,30 @@
     };
 
     liftApp.valueToLabel = function (value) {
-        value = value.charAt(0).toUpperCase() + value.slice(1);
+        var value = value.charAt(0).toUpperCase() + value.slice(1);
         return value.split('_').join(' ');
     };
+
+    liftApp.URLArrayToArray = function (string) {
+        var retArr = [];
+        string = string.split(',');
+        $(string).each(function(i,v){
+            v = v.split('/')[0]
+            retArr.push(v.split('%20').join(' '));
+        });
+        return retArr;
+    }
+
+    liftApp.URLArrayToCommaList = function (string) {
+        var retStr = [];
+        string = string.split(',');
+        $(string).each(function(i,v){
+            v = v.split('/')[0];
+            if (v!="") { retStr.push(v.split('%20').join(' ')); }
+        });
+        spacer = function(word) { return word = ' ' + word; }
+        return retStr.map(spacer);
+    }
 
     liftApp.setTableHeader = function ($table) {
         var $thead = $('<thead></thead>');

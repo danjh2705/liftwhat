@@ -36,29 +36,53 @@
         $('#inputs').empty();
         var selectedFile = $(e.target).find('option:selected')[0].value;
         var selectedName = liftApp.fileToName(selectedFile);
+
         if (selectedName != 'no') {
           inputs = liftApp.fetchRoutineInputs(selectedName);
           $(inputs).each(function(i,input){
             var $input = $('<div class="input"></div>');
             $input.append('<label for="' + input.value + '">' + liftApp.valueToLabel(input.value) + '</label>');
-            $select = liftApp.buildWeightSelector();
+
+            buildCustomSelector = function(input) {
+              var $select = $('<select></select>');
+
+              if(input.type=='multiselect') {
+                $select.attr('multiple','multiple');
+                $(input.options).each(function(i,option){
+                  $select.append('<option value ="' + option + '"">' + option + '</option>');
+                });
+              }
+
+              return $select;
+            }
+
+            $select = (input.type == 'number') ? liftApp.buildWeightSelector() : buildCustomSelector(input);
+
             $select.attr('id', input.value);
             $input.append($select);
             $('#inputs').append($input);
-            var $button = $('<button id="run">Get AFTER it!</button>').addClass('btn btn-large btn-block btn-danger').click(function(e){
-                $(e.target).attr('disabled', 'disabled');
-                var url = liftApp.fetchRoot();
-                url += ('routines/' + selectedFile + '/?');
-                $('.input select').each(function(i, select){
-                  var key   = $(select).attr('id');
-                  var value = $(select).find('option:selected').val();
-                  url += (key + '=' + value);
-                  if (i < $('.input select').length - 1) { url += '&' }
-                });
-                window.location.assign(url);
-            });
-            $('#button_container').html($button);
           });
+          var $button = $('<button id="run">Get AFTER it!</button>').addClass('btn btn-large btn-block btn-danger').click(function(e){
+            $(e.target).attr('disabled', 'disabled');
+            var url = liftApp.fetchRoot();
+            url += ('routines/' + selectedFile + '/?');
+            $('.input select').each(function(i, select){
+              var key = $(select).attr('id');
+              if ($(select).attr('multiple')) {
+                var value = [];
+                $(select).find('option:selected').each(function(x,option){
+                  value.push($(option).val()+',');
+                });
+              }
+              else {
+                var value = $(select).find('option:selected').val();
+              }
+              url += (key + '=' + value);
+              if (i < $('.input select').length - 1) { url += '&' }
+            });
+            window.location.assign(url);
+          });
+          $('#button_container').html($button);
         }
         else {
           $('#button_container').empty();

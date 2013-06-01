@@ -14,6 +14,23 @@ body { font-size: 1.1em; color: #444; }
 
 h1 a, h1 a:hover, h1 a:visited { color: #444; }
 
+p.description {
+	border-top: 1px solid #d3d3d3;
+	border-bottom: 1px solid #d3d3d3;
+	padding: 25px 8px 25px 75px;
+	margin: 20px 0;
+	position: relative;
+}
+
+p.description:before {
+	content: 'Note';
+	font-weight: bold;
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 40%;
+}
+
 h3 { margin-top: 100px; position: relative; }
 h3:first-child { margin-top: 50px; }
 h3.break:before {
@@ -25,6 +42,8 @@ h3.break:before {
 	margin-bottom: -20px;
 }
 h3.break span { background-color: white; padding-right: 10px; }
+
+table + h4 { margin-top: 50px; }
 
 #form {	margin-top: 40px; }
 
