@@ -23,7 +23,7 @@ p.description {
 }
 
 p.description:before {
-	content: 'Note';
+	content: 'About';
 	font-weight: bold;
 	display: block;
 	position: absolute;

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title>LiftWhat? - Russian Squat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LiftWhat? presents the Smolov Squat Routine. First introduced to us by Pavel the crazy Russian, this program is sure to make you squat more. This here is part two. You've made it this far...">
+  </head>
+  <body>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/liftApp.js"></script>
+    <script>
+	liftApp.localInit = function(){
+		if (liftApp.ARGV.current_max) {
+			var max = parseInt(liftApp.ARGV.current_max);
+			var unit = liftApp.ARGV.u || 'pounds';
+			var days = [
+				[
+					{sets:1,reps:3,intensity:.65},
+					{sets:1,reps:4,intensity:.75},
+					{sets:3,reps:4,intensity:.85}
+				],
+				[
+					{sets:1,reps:3,intensity:.6},
+					{sets:1,reps:3,intensity:.7},
+					{sets:1,reps:4,intensity:.8},
+					{sets:1,reps:3,intensity:.9},
+					{sets:2,reps:5,intensity:.85}
+				],
+				[
+					{sets:1,reps:4,intensity:.65},
+					{sets:1,reps:4,intensity:.7},
+					{sets:5,reps:4,intensity:.8}
+				],
+				[
+					{sets:1,reps:4,intensity:.6},
+					{sets:1,reps:4,intensity:.7},
+					{sets:1,reps:4,intensity:.8},
+					{sets:1,reps:3,intensity:.9},
+					{sets:2,reps:4,intensity:.9}
+				],
+				[
+					{sets:1,reps:3,intensity:.65},
+					{sets:1,reps:3,intensity:.75},
+					{sets:1,reps:3,intensity:.85},
+					{sets:3,reps:3,intensity:.9},
+					{sets:1,reps:3,intensity:.95}
+				],
+				[
+					{sets:1,reps:3,intensity:.65},
+					{sets:1,reps:3,intensity:.75},
+					{sets:1,reps:4,intensity:.85},
+					{sets:4,reps:5,intensity:.9}
+				],
+				[
+					{sets:1,reps:3,intensity:.6},
+					{sets:1,reps:3,intensity:.7},
+					{sets:1,reps:3,intensity:.8},
+					{sets:5,reps:5,intensity:.9}
+				],
+				[
+					{sets:1,reps:3,intensity:.6},
+					{sets:1,reps:3,intensity:.7},
+					{sets:1,reps:3,intensity:.8},
+					{sets:2,reps:3,intensity:.95}
+				],
+				[
+					{sets:1,reps:3,intensity:.65},
+					{sets:1,reps:3,intensity:.75},
+					{sets:1,reps:3,intensity:.85},
+					{sets:4,reps:3,intensity:.95}
+				],
+				[
+					{sets:1,reps:3,intensity:.7},
+					{sets:1,reps:4,intensity:.8},
+					{sets:5,reps:5,intensity:.9}
+				],
+				[
+					{sets:1,reps:3,intensity:.7},
+					{sets:1,reps:3,intensity:.8},
+					{sets:4,reps:3,intensity:.95}
+				],
+				[
+					{sets:1,reps:3,intensity:.75},
+					{sets:1,reps:4,intensity:.9},
+					{sets:3,reps:4,intensity:.95}
+				],
+				[
+					{sets:1,reps:3,intensity:.7},
+					{sets:1,reps:3,intensity:.8},
+					{sets:2,reps:5,intensity:.9},
+					{sets:3,reps:4,intensity:.95}
+				],
+				[{sets:' - ',reps:' - ',intensity:'OFF!'}],
+				[
+					{sets:1,reps:4,intensity:.75},
+					{sets:4,reps:4,intensity:.85}
+				],
+				[{sets:' - ',reps:' - ',intensity:'OFF!'}],
+				[{sets:' - ',reps:' - ',intensity:'OFF!'}],
+				[{sets:' - ',reps:' - ',intensity:'OFF!'}],
+				[{sets:1,reps:1,intensity:'Destroy your old PR!'}]
+			];
+			$container.append('<h4> Current Max is <span class="red">' + max + '</span> ' + unit + '.</h4>');
+			$container.append('<p class="description"> This is part two of a two part routine. You should have established a fresh squat max in part one that you will now use to grind out another PR at the end of these brutal sessions.</p>');
+			var $weeks = $('<div id="weeks"></div>');
+			var weekNumber = 1;
+			var dayOfWeek = 1;
+
+			$(days).each(function(i,day){
+				var currentDay = i + 1;
+				if (currentDay%3 == 1 && weekNumber <= 5) {
+					$weeks.append('<h3 class="break"><span>Week ' + weekNumber + '</span></h3>');
+					weekNumber++;
+					dayOfWeek = 1;
+				}
+				var $table = $('<table></table>');
+				var $tbody = $('<tbody></tbody>');
+				liftApp.setTableHeader($table);
+
+				$weeks.append('<h4>Day ' + dayOfWeek + '</h4>');
+				dayOfWeek++;
+
+				$(day).each(function(j,scheme){
+					$row = $('<tr></tr>');
+					$row.append('<td>Squat</td>');
+					$row.append('<td>' + scheme.sets + '</td>');
+					$row.append('<td>' + scheme.reps + '</td>');
+					var intensity = (typeof(scheme.intensity)=='string') ? scheme.intensity : max * scheme.intensity;
+					$row.append('<td>' + intensity + '</td>');
+					$tbody.append($row);
+				});
+
+				$table.append($tbody);
+				$weeks.append($table);
+			});
+			$container.append($weeks);
+		}
+	};
+    </script>
+  </body>
+</html>

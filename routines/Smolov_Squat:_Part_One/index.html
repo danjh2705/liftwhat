@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title>LiftWhat? - Russian Squat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LiftWhat? presents the Smolov Squat Routine. First introduced to us by Pavel the crazy Russian, this program is sure to make you squat more. This here is part one. Good luck.">
+  </head>
+  <body>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/liftApp.js"></script>
+    <script>
+	liftApp.localInit = function(){
+		if (liftApp.ARGV.current_max) {
+			var max = parseInt(liftApp.ARGV.current_max);
+			var unit = liftApp.ARGV.u || 'pounds';
+			var week = {
+				1: {
+					scheme: [[3,8],[1,5],[2,2],[1,1]],
+					intensity: [.65,.7,.75,.8]
+				},
+				2: {
+					scheme: [[4,9],[5,7],[7,5],[10,3]],
+					intensity: [.7,.75,.8,.85]
+				}
+			};
+			$container.append('<h4> Current Max is <span class="red">' + max + '</span> ' + unit + '.</h4>');
+			$container.append('<p class="description"> This is part one of a two part routine. Bang this thing out, get a new max, then take that new max on over to part two and wreck that as well!</p>');
+			var $weeks = $('<div id="weeks"></div>');
+			for(i=1; i<6; i++) {
+				$weeks.append('<h3 class="break"><span>Week ' + i + '</span></h3>');
+				var $table = $('<table></table>');
+				var $tbody = $('<tbody></tbody>');
+				liftApp.setTableHeader($table);
+
+				if (i<2) {
+
+					for (x=0; x<3; x++){
+						$row = $('<tr></tr>');
+						$row.append('<td><em class="muted">Day ' + parseInt(x+1) + ':</em> Squat</td>');
+						$row.append('<td>' + week[1].scheme[x][0] + '</td>');
+						$row.append('<td>' + week[1].scheme[x][1] + '</td>');
+						$row.append('<td>' + max * week[1].intensity[x] + '</td>');
+						$tbody.append($row);
+					}
+
+				}
+
+				if (i>=2 && i<5) {
+					var bump1 = (i>=2) ? 20 : 0;
+					var bump2 = (i>=3) ? 10 : 0;
+					for (x=0; x<3; x++){
+						$row = $('<tr></tr>');
+						$row.append('<td><em class="muted">Day ' + parseInt(x+1) + ':</em> Squat</td>');
+						$row.append('<td>' + week[2].scheme[x][0] + '</td>');
+						$row.append('<td>' + week[2].scheme[x][1] + '</td>');
+						$row.append('<td>' + (max + bump1 + bump2) * week[2].intensity[x] + '</td>');
+						$tbody.append($row);
+					}
+				}
+
+				if (i>=5) {
+					for (x=0; x<3; x++){
+						$row = $('<tr></tr>');
+						if(x==0 || x==1) {
+							$row.append('<td><em class="muted">Day ' + parseInt(x+1) + ':</em> Take it off!</td>');
+							$row.append('<td> - </td>');
+							$row.append('<td> - </td>');
+							$row.append('<td> - </td>');
+						}
+						else {
+							$row.append('<td><em class="muted">Day 3 or 4:</em> Squat</td>');
+							$row.append('<td> 1 </td>');
+							$row.append('<td> 1 </td>');
+							$row.append('<td> Get yourself a new max for Phase 2! </td>');
+						}
+						
+						$tbody.append($row);
+					}
+				}
+
+				$table.append($tbody);
+				$weeks.append($table);
+			}
+
+			$container.append($weeks);
+		}
+	};
+    </script>
+  </body>
+</html>

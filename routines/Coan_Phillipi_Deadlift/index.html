@@ -3,7 +3,7 @@
   <head>
   	<title>LiftWhat? - Coan Phillipi Deadlift</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="LiftWhat? presents the Coan Phillipi Deadlift Routine. This brutal lifting program is sure to increase your PR.">
+    <meta name="description" content="LiftWhat? presents the Coan Phillipi Deadlift Routine. Train the way Sir Ed Coan did. This brutal lifting program is sure to increase your PR.">
   </head>
   <body>
     <script src="../../js/jquery.min.js"></script>
@@ -17,6 +17,7 @@
 			$container.append('<h4> Current Max is <span class="red">' + currentMax + '</span> ' + unit + '.</h4>');
 			$container.append('<h4> Target Max is <span class="red">' + targetMax + '</span> ' + unit + '.</h4>');
 			$container.append('<h4> An increase of <span class="red">' + Math.round(((targetMax/currentMax)-1)*10000)/100 + '%</span>.</h4>');
+			$container.append('<p class="description"> Train the way Sir Ed Coan did. This brutal lifting program is sure to increase your PR.</p>');
 			var $weeks = $('<div id="weeks"></div>');
 			for(i=1; i<11; i++) {
 				$weeks.append('<h3 class="break"><span>Week ' + i + '</span></h3>');
