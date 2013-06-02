@@ -74,8 +74,6 @@
 
 			var unit = liftApp.ARGV.u || 'pounds';
 
-			$container.append('<p class="description">So this is a best attempt at giving you an easy to digest template for the Cube. You <em>really</em> need to <a target="_blank" href="http://www.jtsstrength.com/store/">buy and read Brandon\'s book</a> to put this to full use. Do it!</p>');
-
 			$container.append('<h4> Current Squat Max is <span class="red">' + squatMax + '</span> ' + unit + '.</h4>');
 			$container.append('<h4> Current Bench Max is <span class="red">' + benchMax + '</span> ' + unit + '.</h4>');
 			$container.append('<h4> Current Deadlift Max is <span class="red">' + deadMax + '</span> ' + unit + '.</h4>');
@@ -87,6 +85,8 @@
 			squatMax *= .95; benchMax *= .95; deadMax *= .95; //Adjust maxes per rec
 			var maxArray = [deadMax, benchMax, squatMax];
 			var currentScheme = 0, movementRotator = -1, deadliftRotator = 0;
+
+			$container.append('<p class="description">So this is a best attempt at giving you an easy to digest template for the Cube. You <em>really</em> need to <a target="_blank" href="http://www.jtsstrength.com/store/">buy and read Brandon\'s book</a> to put this to full use. Do it!</p>');
 
 			var $weeks = $('<div id="weeks"></div>');
 

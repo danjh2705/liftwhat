@@ -34,6 +34,22 @@
              ],
               type: 'Olympic Weightlifting'
             },
+            {name: 'Smolov Squat: Part One',
+             inputs: [
+                { type: "number",
+                  value: "current_max"
+                }
+             ],
+              type: 'Olympic Weightlifting'
+            },
+            {name: 'Smolov Squat: Part Two',
+             inputs: [
+                { type: "number",
+                  value: "current_max"
+                }
+             ],
+              type: 'Olympic Weightlifting'
+            },
             {name: 'Korte 3x3',
              inputs: [
                 {
