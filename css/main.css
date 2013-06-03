@@ -31,6 +31,12 @@ p.description:before {
 	top: 40%;
 }
 
+p.week-description {
+	font-size: .9em;
+	padding: 15px 5px;
+	font-style: italic;
+}
+
 h3 { margin-top: 100px; position: relative; }
 h3:first-child { margin-top: 50px; }
 h3.break:before {

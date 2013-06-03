@@ -13,79 +13,120 @@
 		if (liftApp.ARGV.current_max) {
 			var max = parseInt(liftApp.ARGV.current_max);
 			var unit = liftApp.ARGV.u || 'pounds';
-			var week = {
-				1: {
-					scheme: [[3,8],[1,5],[2,2],[1,1]],
-					intensity: [.65,.7,.75,.8]
-				},
-				2: {
-					scheme: [[4,9],[5,7],[7,5],[10,3]],
-					intensity: [.7,.75,.8,.85]
-				}
-			};
+			var firstDays = [
+				[
+					{sets:3,reps:8,intensity:.65},
+					{sets:1,reps:5,intensity:.70},
+					{sets:2,reps:2,intensity:.75},
+					{sets:1,reps:1,intensity:.8}
+				],
+				[
+					{sets:3,reps:8,intensity:.65},
+					{sets:1,reps:5,intensity:.70},
+					{sets:2,reps:2,intensity:.75},
+					{sets:1,reps:1,intensity:.8}
+				],
+				[
+					{sets:4,reps:5,intensity:.7},
+					{sets:1,reps:3,intensity:.75},
+					{sets:2,reps:2,intensity:.8},
+					{sets:1,reps:1,intensity:.9}
+				]];
+
+			var lastDays = [
+				[
+				 {sets:4,reps:9,intensity:.7},
+				 {sets:5,reps:7,intensity:.75},
+				 {sets:7,reps:5,intensity:.8},
+				 {sets:10,reps:3,intensity:.85}
+				],
+				[
+				 {sets:4,reps:9,intensity:.7},
+				 {sets:5,reps:7,intensity:.75},
+				 {sets:7,reps:5,intensity:.8},
+				 {sets:10,reps:3,intensity:.85}
+				],
+				[
+				 {sets:4,reps:9,intensity:.7},
+				 {sets:5,reps:7,intensity:.75},
+				 {sets:7,reps:5,intensity:.8},
+				 {sets:10,reps:3,intensity:.85}
+				],
+				[
+				 {sets:' - ',reps:' - ',intensity:'OFF!'},
+				 {sets:' - ',reps:' - ',intensity:'OFF!'},
+				 {sets:1,reps:1,intensity:'Destroy your old PR here!'},
+				 {sets:1,reps:1,intensity:'or wreck that shit here!'}
+				]
+			];
 			$container.append('<h4> Current Max is <span class="red">' + max + '</span> ' + unit + '.</h4>');
 			$container.append('<p class="description"> This is part one of a two part routine. Bang this thing out, get a new max, then take that new max on over to part two and wreck that as well!</p>');
 			var $weeks = $('<div id="weeks"></div>');
-			for(i=1; i<5; i++) {
-				$weeks.append('<h3 class="break"><span>Week ' + i + '</span></h3>');
+			var weekNumber = 1;
+			var dayOfWeek = 1;
+			var daySwitch = 3;
+
+			$(firstDays).each(function(i,day){
+				var currentDay = i + 1;
+				if (currentDay%daySwitch == 1 && weekNumber <= 5) {
+					$weeks.append('<h3 class="break"><span>Week ' + weekNumber + '</span></h3>');
+					$weeks.append('<p class="week-description">In order to get prepped for your descent into Smolov hell, you should run this first week as many times as necessary.</p>');
+					weekNumber++;
+					dayOfWeek = 1;
+				}
 				var $table = $('<table></table>');
 				var $tbody = $('<tbody></tbody>');
 				liftApp.setTableHeader($table);
 
-				if (i<2) {
+				$weeks.append('<h4>Day ' + dayOfWeek + '</h4>');
+				dayOfWeek++;
 
-					for (x=0; x<3; x++){
-						$row = $('<tr></tr>');
-						$row.append('<td><em class="muted">Day ' + parseInt(x+1) + ':</em> Squat</td>');
-						$row.append('<td>' + week[1].scheme[x][0] + '</td>');
-						$row.append('<td>' + week[1].scheme[x][1] + '</td>');
-						$row.append('<td>' + parseInt(max * week[1].intensity[x]) + '</td>');
-						$row.append('<td>' + parseInt(week[1].intensity[x]*100) + '</td>');
-						$tbody.append($row);
-					}
-					$tbody.append('<tr><td class="group-instructions" colspan="5"><span>Repeat as necessary.</span></td></tr>');
-
-				}
-
-				if (i>=2 && i<4) {
-					var bump1 = (i>=2) ? 20 : 0;
-					var bump2 = (i>=3) ? 10 : 0;
-					for (x=0; x<3; x++){
-						$row = $('<tr></tr>');
-						$row.append('<td><em class="muted">Day ' + parseInt(x+1) + ':</em> Squat</td>');
-						$row.append('<td>' + week[2].scheme[x][0] + '</td>');
-						$row.append('<td>' + week[2].scheme[x][1] + '</td>');
-						$row.append('<td>' + parseInt((max + bump1 + bump2) * week[2].intensity[x]) + '</td>');
-						$row.append('<td>' + parseInt(week[2].intensity[x]*100) + ' +' + parseInt(bump1 + bump2)  + '</td>');
-						$tbody.append($row);
-					}
-				}
-
-				if (i>=4) {
-					for (x=0; x<3; x++){
-						$row = $('<tr></tr>');
-						if(x==0 || x==1) {
-							$row.append('<td><em class="muted">Day ' + parseInt(x+1) + ':</em> Take it off!</td>');
-							$row.append('<td> - </td>');
-							$row.append('<td> - </td>');
-							$row.append('<td> - </td>');
-							$row.append('<td> - </td>');
-						}
-						else {
-							$row.append('<td><em class="muted">Day 3 or 4:</em> Squat</td>');
-							$row.append('<td> 1 </td>');
-							$row.append('<td> 1 </td>');
-							$row.append('<td> Get yourself a new max for Phase 2! </td>');
-							$row.append('<td>100+</td>');
-						}
-						
-						$tbody.append($row);
-					}
-				}
+				$(day).each(function(j,scheme){
+					$row = $('<tr></tr>');
+					$row.append('<td>Squat</td>');
+					$row.append('<td>' + scheme.sets + '</td>');
+					$row.append('<td>' + scheme.reps + '</td>');
+					var intensity = (typeof(scheme.intensity)=='string') ? '-' : parseInt(max * scheme.intensity);
+					$row.append('<td>' + intensity + '</td>');
+					intensity = (typeof(scheme.intensity)=='string') ? scheme.intensity : parseInt(100 * scheme.intensity);
+					$row.append('<td>' + intensity + '</td>');
+					$tbody.append($row);
+				});
 
 				$table.append($tbody);
 				$weeks.append($table);
-			}
+			});
+
+		    var increment = [0,20,30];
+
+			$(lastDays).each(function(i,day){
+				var $table = $('<table></table>');
+				var $tbody = $('<tbody></tbody>');
+				liftApp.setTableHeader($table);
+
+				$weeks.append('<h3 class="break"><span>Week ' + parseInt(i+2) + '</span></h3>');
+
+				$(day).each(function(j,scheme){
+					$row = $('<tr></tr>');
+					$row.append('<td><em class="muted">Day ' + parseInt(j+1) + ':</em> Squat</td>');
+					$row.append('<td>' + scheme.sets + '</td>');
+					$row.append('<td>' + scheme.reps + '</td>');
+
+					var intensity = (typeof(scheme.intensity)=='string') ? '-' : parseInt((max + increment[i]) * scheme.intensity);
+
+					$row.append('<td>' + intensity + '</td>');
+
+					var incrementString = (increment[i] == 0) ? '' : '<small>max+' + increment[i] + ' </small>'; 
+
+					intensity = (typeof(scheme.intensity)=='string') ? scheme.intensity : incrementString + parseInt(100 * scheme.intensity);
+
+					$row.append('<td>' + intensity + '</td>');
+					$tbody.append($row);
+				});
+
+				$table.append($tbody);
+				$weeks.append($table);
+			});
 
 			$container.append($weeks);
 		}
