@@ -25,9 +25,9 @@
 				if (i == 1) {
 					liftApp.setTableHeader($table);
 					$tbody.append('<tr><td rowspan="4">Deadlift</td></tr>');
-					$tbody.append('<tr><td>4</td><td>4</td><td>' + parseInt(max * .7) + '</td></tr>');
-					$tbody.append('<tr><td>2</td><td>2</td><td>' + parseInt(max * .8) + '</td></tr>');
-					$tbody.append('<tr><td>1</td><td>8+</td><td>' + parseInt(max * .7) + '</td></tr>');
+					$tbody.append('<tr><td>4</td><td>4</td><td>' + parseInt(max * .7) + '</td><td>70</td></tr>');
+					$tbody.append('<tr><td>2</td><td>2</td><td>' + parseInt(max * .8) + '</td><td>80</td></tr>');
+					$tbody.append('<tr><td>1</td><td>8+</td><td>' + parseInt(max * .7) + '</td><td>70</td></tr>');
 				}
 
 				else if (i%4 == 0) {
@@ -39,10 +39,10 @@
 					var incrementer = (unit == 'pounds') ? 10 : 5;
 					difficulty = (i == 3 || i == 6 || i == 7 || i == 10 || i == 11) ? difficulty + incrementer : difficulty;
 					$tbody.append('<tr><td rowspan="5">Deadlift</td></tr>');
-					$tbody.append('<tr><td>4</td><td>4</td><td>' + parseInt((max * .7) + difficulty) + '</td></tr>');
-					$tbody.append('<tr><td>1</td><td>2</td><td>' + parseInt((max * .8) + difficulty) + '</td></tr>');
-					$tbody.append('<tr><td>1</td><td>2</td><td>' + parseInt((max * .9) + difficulty) + '</td></tr>');
-					$tbody.append('<tr><td>1</td><td>8+</td><td>' + parseInt((max * .7) + difficulty) + '</td></tr>');
+					$tbody.append('<tr><td>4</td><td>4</td><td>' + parseInt((max * .7) + difficulty) + '</td><td>70 +'+ difficulty +'</td></tr>');
+					$tbody.append('<tr><td>1</td><td>2</td><td>' + parseInt((max * .8) + difficulty) + '</td><td>80 +'+ difficulty +'</td></tr>');
+					$tbody.append('<tr><td>1</td><td>2</td><td>' + parseInt((max * .9) + difficulty) + '</td><td>90 +'+ difficulty +'</td></tr>');
+					$tbody.append('<tr><td>1</td><td>8+</td><td>' + parseInt((max * .7) + difficulty) + '</td><td>70 +'+ difficulty +'</td></tr>');
 				}
 				$table.append($tbody);
 				$weeks.append($table);

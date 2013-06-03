@@ -38,6 +38,7 @@
 						$row.append('<td>' + setsReps[i-1][x][0] + '</td>');
 						$row.append('<td>' + setsReps[i-1][x][1] + '</td>');
 						$row.append('<td>' + parseInt(max * .8) + '</td>');
+						$row.append('<td>' + .8*100 + '</td>');
 						$tbody.append($row);
 					}
 
@@ -56,6 +57,7 @@
 						$row.append('<td>' + setsReps[i-1][x][0] + '</td>');
 						$row.append('<td>' + setsReps[i-1][x][1] + '</td>');
 						$row.append('<td>' + parseInt(max * intensity[i-4][x]) + '</td>');
+						$row.append('<td>' + parseInt(100 * intensity[i-4][x]) + '</td>');
 						$tbody.append($row);
 					}
 				}

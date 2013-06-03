@@ -26,35 +26,37 @@
 				liftApp.setTableHeader($table);
 				var incrementer = .05;
 				if(i<5) {
-					$tbody.append('<tr><td>Deadlift</td><td>1</td><td>2</td><td>' + parseInt(currentMax*(.85+incrementer*(i-1))) + '</td></tr>');
-					$tbody.append('<tr><td>Speed Deadlift</td><td>8</td><td>3</td><td>' + parseInt(currentMax*(.65+incrementer*(i-1))) + '</td></tr>');
-					$tbody.append('<tr><td class="group-instructions" colspan="4"><span>Three circuits of:</span></td></tr>');
-					$tbody.append('<tr><td>Stiff Leg Deadlift</td><td>1</td><td>8</td><td><em class="muted">Feel it out.</em></td></tr>');
-					$tbody.append('<tr><td>Bent Over Rows</td><td>1</td><td>8</td><td><em class="muted">Feel it out.</em></td></tr>');
-					$tbody.append('<tr><td>Suppinated (underhand) Lat Pulldown</td><td>1</td><td>8</td><td><em class="muted">Feel it out.</em></td></tr>');
-					$tbody.append('<tr><td>Arched Back Good Mornings</td><td>1</td><td>8</td><td><em class="muted">Feel it out.</em></td></tr>');
+					$tbody.append('<tr><td>Deadlift</td><td>1</td><td>2</td><td>' + parseInt(currentMax*(.85+incrementer*(i-1))) + '</td><td>' + parseInt(100*(.85+incrementer*(i-1))) + '</td></tr>');
+					$tbody.append('<tr><td>Speed Deadlift</td><td>8</td><td>3</td><td>' + parseInt(currentMax*(.65+incrementer*(i-1))) + '</td><td>' + parseInt(100*(.65+incrementer*(i-1))) + '</td></tr>');
+					$tbody.append('<tr><td class="group-instructions" colspan="5"><span>Three circuits of:</span></td></tr>');
+					$tbody.append('<tr><td>Stiff Leg Deadlift</td><td>1</td><td>8</td><td></td><td><em class="muted">Feel it out.</em></td></tr>');
+					$tbody.append('<tr><td>Bent Over Rows</td><td>1</td><td>8</td><td></td><td><em class="muted">Feel it out.</em></td></tr>');
+					$tbody.append('<tr><td>Suppinated (underhand) Lat Pulldown</td><td>1</td><td>8</td><td></td><td><em class="muted">Feel it out.</em></td></tr>');
+					$tbody.append('<tr><td>Arched Back Good Mornings</td><td>1</td><td>8</td><td></td><td><em class="muted">Feel it out.</em></td></tr>');
 				}
 
 				else if (i<9) {
-					$tbody.append('<tr><td>Deadlift</td><td>1</td><td>2</td><td>' + parseInt(currentMax*(.90+incrementer*(i-5))) + '</td></tr>');
-					$tbody.append('<tr><td>Speed Deadlift</td><td>3</td><td>3</td><td>' + parseInt(currentMax*(.65+incrementer*(i-5))) + '</td></tr>');
-					$tbody.append('<tr><td>Power Shrug</td><td>3</td><td>5</td><td>' + parseInt(currentMax*(.60+incrementer*(i-5))) + '</td></tr>');
-					$tbody.append('<tr><td>Stiff Leg Deadlift</td><td>3</td><td>5</td><td><em class="muted">Feel it out.</em></td></tr>');
-					$tbody.append('<tr><td>Bent Over Rows</td><td>3</td><td>5</td><td><em class="muted">Feel it out.</em></td></tr>');
-					$tbody.append('<tr><td>Suppinated (underhand) Lat Pulldown</td><td>3</td><td>5</td><td><em class="muted">Feel it out.</em></td></tr>');
-					$tbody.append('<tr><td>Arched Back Good Mornings</td><td>3</td><td>5</td><td><em class="muted">Feel it out.</em></td></tr>');
+					$tbody.append('<tr><td>Deadlift</td><td>1</td><td>2</td><td>' + parseInt(currentMax*(.90+incrementer*(i-5))) + '</td><td>' + parseInt(100*(.90+incrementer*(i-5))) + '</td></tr>');
+					$tbody.append('<tr><td>Speed Deadlift</td><td>3</td><td>3</td><td>' + parseInt(currentMax*(.65+incrementer*(i-5))) + '</td><td>' + parseInt(100*(.65+incrementer*(i-5))) + '</td></tr>');
+					$tbody.append('<tr><td>Power Shrug</td><td>3</td><td>5</td><td>' + parseInt(currentMax*(.60+incrementer*(i-5))) + '</td><td>' + parseInt(100*(.60+incrementer*(i-5))) + '</td></tr>');
+					$tbody.append('<tr><td>Stiff Leg Deadlift</td><td>3</td><td>5</td><td></td><td><em class="muted">Feel it out.</em></td></tr>');
+					$tbody.append('<tr><td>Bent Over Rows</td><td>3</td><td>5</td><td></td><td><em class="muted">Feel it out.</em></td></tr>');
+					$tbody.append('<tr><td>Suppinated (underhand) Lat Pulldown</td><td>3</td><td>5</td><td></td><td><em class="muted">Feel it out.</em></td></tr>');
+					$tbody.append('<tr><td>Arched Back Good Mornings</td><td>3</td><td>5</td><td></td><td><em class="muted">Feel it out.</em></td></tr>');
 				}
 
 				else if (i==9) {
-					$tbody.append('<tr><td>Deadlift</td><td>1</td><td>1</td><td>' + parseInt(targetMax*.975) + '</td></tr>');
-					$tbody.append('<tr><td>Speed Deadlift</td><td>2</td><td>3</td><td>' + parseInt(targetMax*.70) + '</td></tr>');
-					$tbody.append('<tr><td>Power Shrug</td><td>2</td><td>5</td><td>' + parseInt(currentMax*.75) + '</td></tr>');
-					$tbody.append('<tr><td>Stiff Leg Deadlift</td><td>2</td><td>5</td><td><em class="muted">Feel it out.</em></td></tr>');
+					$tbody.append('<tr><td>Deadlift</td><td>1</td><td>1</td><td>' + parseInt(targetMax*.975) + '</td><td>' + parseInt(100*.975) + '</td></tr>');
+					$tbody.append('<tr><td>Speed Deadlift</td><td>2</td><td>3</td><td>' + parseInt(targetMax*.70) + '</td><td>' + parseInt(100*.70) + '</td></tr>');
+					$tbody.append('<tr><td>Power Shrug</td><td>2</td><td>5</td><td>' + parseInt(currentMax*.75) + '</td><td>' + parseInt(100*.75) + '</td></tr>');
+					$tbody.append('<tr><td>Stiff Leg Deadlift</td><td>2</td><td>5</td><td></td><td><em class="muted">Feel it out.</em></td></tr>');
+					$tbody.append('<tr><td class="group-instructions" colspan="5"><span>Weight based of target now.</span></td></tr>');
 				}
 
 				else {
-					$tbody.append('<tr><td>Deadlift</td><td>1</td><td>1</td><td>' + targetMax + '</td></tr>');
-					$tbody.append('<tr><td>Speed Deadlift</td><td>2</td><td>3</td><td>' + parseInt(targetMax*.60) + '</td></tr>');
+					$tbody.append('<tr><td>Deadlift</td><td>1</td><td>1</td><td>' + targetMax + '</td><td>100</td></tr>');
+					$tbody.append('<tr><td>Speed Deadlift</td><td>2</td><td>3</td><td>' + parseInt(targetMax*.60) + '</td><td>' + parseInt(100*.60) + '</td></tr>');
+					$tbody.append('<tr><td class="group-instructions" colspan="5"><span>Weight based of target now.</span></td></tr>');
 				}
 
 				$table.append($tbody);

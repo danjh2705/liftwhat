@@ -66,7 +66,7 @@
                 }
              ],
               type: 'Powerlifting'
-            },
+            }/*,
             {name: 'Brandon Lillys Cube Method',
              inputs: [
                 {
@@ -147,7 +147,7 @@
                 }
              ],
               type: 'Powerlifting'
-            }
+            }*/
         ],
         types: [
             'Olympic Weightlifting',
@@ -177,6 +177,11 @@
         if (liftApp.locale != 'Welcome.') {
             $footer = $('<div id="footer"></div>');
             $footer.append('<a href="/">Wanna try another?</a>');
+            $('#container').append($footer);
+        }
+        else {
+            $footer = $('<div id="footer" class="home"></div>');
+            $footer.append('<p>Currently in <strong>BETA.</strong><br> Feedback or requests? <a href="mailto:admin@liftwhat.com">Email me!</a>');
             $('#container').append($footer);
         }
     }
@@ -221,7 +226,7 @@
 
     liftApp.setTableHeader = function ($table) {
         var $thead = $('<thead></thead>');
-        $thead.append('<tr><th>Lift</th><th>Sets</th><th>Reps</th><th>Weight</th></tr>');
+        $thead.append('<tr><th>Lift</th><th>Sets</th><th>Reps</th><th>Weight</th><th>%</th></tr>');
         $table.append($thead);
     };
 
