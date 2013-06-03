@@ -26,7 +26,7 @@
 			$container.append('<h4> Current Max is <span class="red">' + max + '</span> ' + unit + '.</h4>');
 			$container.append('<p class="description"> This is part one of a two part routine. Bang this thing out, get a new max, then take that new max on over to part two and wreck that as well!</p>');
 			var $weeks = $('<div id="weeks"></div>');
-			for(i=1; i<6; i++) {
+			for(i=1; i<5; i++) {
 				$weeks.append('<h3 class="break"><span>Week ' + i + '</span></h3>');
 				var $table = $('<table></table>');
 				var $tbody = $('<tbody></tbody>');
@@ -39,13 +39,15 @@
 						$row.append('<td><em class="muted">Day ' + parseInt(x+1) + ':</em> Squat</td>');
 						$row.append('<td>' + week[1].scheme[x][0] + '</td>');
 						$row.append('<td>' + week[1].scheme[x][1] + '</td>');
-						$row.append('<td>' + max * week[1].intensity[x] + '</td>');
+						$row.append('<td>' + parseInt(max * week[1].intensity[x]) + '</td>');
+						$row.append('<td>' + parseInt(week[1].intensity[x]*100) + '</td>');
 						$tbody.append($row);
 					}
+					$tbody.append('<tr><td class="group-instructions" colspan="5"><span>Repeat as necessary.</span></td></tr>');
 
 				}
 
-				if (i>=2 && i<5) {
+				if (i>=2 && i<4) {
 					var bump1 = (i>=2) ? 20 : 0;
 					var bump2 = (i>=3) ? 10 : 0;
 					for (x=0; x<3; x++){
@@ -53,16 +55,18 @@
 						$row.append('<td><em class="muted">Day ' + parseInt(x+1) + ':</em> Squat</td>');
 						$row.append('<td>' + week[2].scheme[x][0] + '</td>');
 						$row.append('<td>' + week[2].scheme[x][1] + '</td>');
-						$row.append('<td>' + (max + bump1 + bump2) * week[2].intensity[x] + '</td>');
+						$row.append('<td>' + parseInt((max + bump1 + bump2) * week[2].intensity[x]) + '</td>');
+						$row.append('<td>' + parseInt(week[2].intensity[x]*100) + ' +' + parseInt(bump1 + bump2)  + '</td>');
 						$tbody.append($row);
 					}
 				}
 
-				if (i>=5) {
+				if (i>=4) {
 					for (x=0; x<3; x++){
 						$row = $('<tr></tr>');
 						if(x==0 || x==1) {
 							$row.append('<td><em class="muted">Day ' + parseInt(x+1) + ':</em> Take it off!</td>');
+							$row.append('<td> - </td>');
 							$row.append('<td> - </td>');
 							$row.append('<td> - </td>');
 							$row.append('<td> - </td>');
@@ -72,6 +76,7 @@
 							$row.append('<td> 1 </td>');
 							$row.append('<td> 1 </td>');
 							$row.append('<td> Get yourself a new max for Phase 2! </td>');
+							$row.append('<td>100+</td>');
 						}
 						
 						$tbody.append($row);
