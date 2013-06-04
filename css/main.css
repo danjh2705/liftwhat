@@ -1,3 +1,5 @@
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
 body { font-size: 1.1em; color: #444; }
 
 .container.narrow {
@@ -5,7 +7,7 @@ body { font-size: 1.1em; color: #444; }
 	margin: 10px auto;
 }
 
-.error {
+.error-404 {
 	width: 400px;
 	margin: 10px auto;
 }
@@ -55,10 +57,33 @@ table + h4 { margin-top: 50px; }
 
 .input, #button_container { margin-top: 20px; }
 .input label { font-size: 1.2em; }
+.input.error {
+	background-color: rgb(255, 88, 88);
+	color: white;
+	width: 100%;
+	padding: 3px 5px;
+	border-radius: 5px;
+	margin-top: 10px;
+}
+.input.error label { text-shadow: 1px 1px 1px red; }
+.input.error input { margin-bottom: 0; }
+.input.error:after {
+	content: "Whoops. You need to fix this.";
+	font-style: italic;
+	font-size: .8em;
+	text-shadow: 1px 1px 1px red;
+}
 
-select, input { width: 100%; }
-input { padding: 10px 0; }
-select { height: 40px; font-size: 1.1em; }
+select, input {
+	width: 100%;
+	height: 40px;
+	font-size: 1.1em;
+}
+
+input[type="number"] {
+	font-size: 1.5em;
+	height: auto;
+}
 
 table { width: 100%; }
 
@@ -111,7 +136,6 @@ table tbody td[rowspan] {
 	margin: 50px auto;
 	text-align: center;
 	font-size: 1.8em;
-	padding: 20px;
 }
 
 #footer.home {
