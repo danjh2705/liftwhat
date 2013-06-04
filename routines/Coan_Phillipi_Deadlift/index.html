@@ -15,6 +15,7 @@
 			var currentMax 	= parseInt(liftApp.ARGV.current_max);
 			var targetMax 	= parseInt(liftApp.ARGV.target_max);
 			var unit = liftApp.ARGV.u || 'pounds';
+			unit = unit.split('/')[0];
 			$container.append('<h4> Current Max is <span class="red">' + currentMax + '</span> ' + unit + '.</h4>');
 			$container.append('<h4> Target Max is <span class="red">' + targetMax + '</span> ' + unit + '.</h4>');
 			$container.append('<h4> An increase of <span class="red">' + Math.round(((targetMax/currentMax)-1)*10000)/100 + '%</span>.</h4>');

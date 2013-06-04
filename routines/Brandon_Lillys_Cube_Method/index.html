@@ -74,6 +74,7 @@
 			dayOrder = dayOrder.concat(dayOrder).concat(dayOrder).concat(dayOrder);
 
 			var unit = liftApp.ARGV.u || 'pounds';
+			unit = unit.split('/')[0];
 
 			$container.append('<h4> Current Squat Max is <span class="red">' + squatMax + '</span> ' + unit + '.</h4>');
 			$container.append('<h4> Current Bench Max is <span class="red">' + benchMax + '</span> ' + unit + '.</h4>');
