@@ -102,6 +102,10 @@ table tbody td[rowspan] {
 	font-style: normal;
 }
 
+.btn-group.block { width: 100%; margin: 20px 0;}
+.btn-group.block .btn { width: 50%; }
+.btn-group.block .btn.active { color: red; }
+
 #footer {
 	width: 300px;
 	margin: 50px auto;

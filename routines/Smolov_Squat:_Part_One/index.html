@@ -14,6 +14,7 @@
 		if (liftApp.ARGV.current_max) {
 			var max = parseInt(liftApp.ARGV.current_max);
 			var unit = liftApp.ARGV.u || 'pounds';
+			unit = unit.split('/')[0];
 			var firstDays = [
 				[
 					{sets:3,reps:8,intensity:.65},
@@ -100,6 +101,11 @@
 
 		    var increment = [0,20,30];
 
+		    if (unit == 'kilos') {
+				function kiloMapper(increment) { return Math.round(increment/2.2046)+1; }
+				increment = increment.map(kiloMapper);
+			}
+
 			$(lastDays).each(function(i,day){
 				var $table = $('<table></table>');
 				var $tbody = $('<tbody></tbody>');
@@ -117,7 +123,7 @@
 
 					$row.append('<td>' + intensity + '</td>');
 
-					var incrementString = (increment[i] == 0) ? '' : '<small>max+' + increment[i] + ' </small>'; 
+					var incrementString = (increment[i] <= 1) ? '' : '<small>max+' + increment[i] + ' </small>'; 
 
 					intensity = (typeof(scheme.intensity)=='string') ? scheme.intensity : incrementString + parseInt(100 * scheme.intensity);
 

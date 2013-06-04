@@ -14,6 +14,7 @@
 		if (liftApp.ARGV.target_max) {
 			var max = parseInt(liftApp.ARGV.target_max);
 			var unit = liftApp.ARGV.u || 'pounds';
+			unit = unit.split('/')[0];
 			var difficulty = 0;
 			$container.append('<h4> Target Max is <span class="red">' + max + '</span> ' + unit + '.</h4>');
 			$container.append('<p class="description"> Travis Ortmayer. Benedikt Magnusson. Deadlift. Enough said.</p>');
