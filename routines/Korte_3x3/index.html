@@ -37,9 +37,9 @@
 
 					if(i<5) {
 
-						$tbody.append('<tr><td>Squat</td><td>5-8</td><td>5</td><td>' + parseInt(squatMax*p1Intensity[i-1]) + '</td><td>'+ parseInt(p1Intensity[i-1]*100) +'</td></tr>');
-						$tbody.append('<tr><td>Bench</td><td>5-8</td><td>5</td><td>' + parseInt(benchMax*p1Intensity[i-1]) + '</td><td>'+ parseInt(p1Intensity[i-1]*100) +'</td></tr>');
-						$tbody.append('<tr><td>Deadlift</td><td>5-8</td><td>5</td><td>' + parseInt(deadMax*p1Intensity[i-1]) + '</td><td>'+ parseInt(p1Intensity[i-1]*100) +'</td></tr>');
+						$tbody.append('<tr><td>Squat</td><td>5-8</td><td>5</td><td>' + parseInt(squatMax*p1Intensity[i-1]) + '</td><td><small>max+25 * </small>' + parseInt(p1Intensity[i-1]*100) +'</td></tr>');
+						$tbody.append('<tr><td>Bench</td><td>5-8</td><td>5</td><td>' + parseInt(benchMax*p1Intensity[i-1]) + '</td><td><small>max+10 * </small>'+ parseInt(p1Intensity[i-1]*100) +'</td></tr>');
+						$tbody.append('<tr><td>Deadlift</td><td>5-8</td><td>5</td><td>' + parseInt(deadMax*p1Intensity[i-1]) + '</td><td><small>max+15 * </small>'+ parseInt(p1Intensity[i-1]*100) +'</td></tr>');
 					}
 
 					if(i>=5) {
@@ -60,9 +60,9 @@
 						benchSR	= (2/localX == 1) ? spikeSR : [5,4];
 						deadSR 	= (3/localX == 1) ? spikeSR : [3,3];
 
-						$tbody.append('<tr><td>Squat</td><td>' + squatSR[0] + '</td><td>' + squatSR[1] + '</td><td>' + parseInt(squatMax*squatI) + '</td><td>' + parseInt(100*squatI) + '</td></tr>');
-						$tbody.append('<tr><td>Bench</td><td>' + benchSR[0] + '</td><td>' + benchSR[1] + '</td><td>' + parseInt(benchMax*benchI) + '</td><td>' + parseInt(100*benchI) + '</td></tr>');
-						$tbody.append('<tr><td>Deadlift</td><td>' + deadSR[0] + '</td><td>' + deadSR[1] + '</td><td>' + parseInt(deadMax*deadI) + '</td><td>' + parseInt(100*deadI) + '</td></tr>');
+						$tbody.append('<tr><td>Squat</td><td>' + squatSR[0] + '</td><td>' + squatSR[1] + '</td><td>' + parseInt(squatMax*squatI) + '</td><td><small>max+25 * </small>' + parseInt(100*squatI) + '</td></tr>');
+						$tbody.append('<tr><td>Bench</td><td>' + benchSR[0] + '</td><td>' + benchSR[1] + '</td><td>' + parseInt(benchMax*benchI) + '</td><td><small>max+10 * </small>' + parseInt(100*benchI) + '</td></tr>');
+						$tbody.append('<tr><td>Deadlift</td><td>' + deadSR[0] + '</td><td>' + deadSR[1] + '</td><td>' + parseInt(deadMax*deadI) + '</td><td><small>max+15 * </small>' + parseInt(100*deadI) + '</td></tr>');
 					}
 
 
