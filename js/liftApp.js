@@ -1,7 +1,12 @@
 (function( liftApp, $, undefined ) {
 
     var appLocation = location || window.location;
-    var root = appLocation.origin + '/';
+    if (appLocation.origin) {
+        var root = appLocation.origin + '/';
+    }
+    else {
+        var root = 'http://' + appLocation.host + '/';
+    }
     var href = appLocation.href;
     var locale = '';
 
