@@ -19,6 +19,9 @@
       var $form = $('<div id="form"></div>');
       var $select = $('<select></select>');
       var $inputs = $('<div id="inputs"></div>');
+      var $unitToggle = $('<div id="unit_toggle" class="btn-group block" data-toggle="buttons-radio"></div>');
+      $unitToggle.append('<button type="button" value="pounds" class="btn btn-large active">Pounds</button>');
+      $unitToggle.append('<button type="button" value="kilos" class="btn btn-large">Kilos</button>');
       var $buttonContainer = $('<div id="button_container"></div>');
       $select.append('<option value="no">Select a program...</option>')
       
@@ -63,6 +66,7 @@
             $input.append($select);
             $('#inputs').append($input);
           });
+
           var $button = $('<button id="run">Get AFTER it!</button>').addClass('btn btn-large btn-block btn-danger').click(function(e){
             $(e.target).attr('disabled', 'disabled');
             var url = liftApp.fetchRoot();
@@ -81,9 +85,15 @@
               url += (key + '=' + value);
               if (i < $('.input select').length - 1) { url += '&' }
             });
+            if ($('#unit_toggle').find('.btn.active').attr('value')=='kilos') {
+              url += '&u=' + $('#unit_toggle').find('.btn.active').attr('value');
+            }
             window.location.assign(url);
           });
-          $('#button_container').html($button);
+
+          var $buttonWrapper = $('<div></div>').append($unitToggle).append($button)
+
+          $('#button_container').html($buttonWrapper);
         }
         else {
           $('#button_container').empty();
