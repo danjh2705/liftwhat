@@ -243,6 +243,17 @@
         return $select;
     };
 
+    liftApp.buildWeightInput = function () {
+        var $input = $('<input type="number" min="1"></input>');
+        $input.focus(function(e){
+            if ($(e.target).parent('.input').hasClass('error')) {
+                $(e.target).parent('.input').removeClass('error');
+                $(e.target).val('');
+            }
+        });
+        return $input;
+    };
+
     liftApp.fetchSlogan = function () {
         var slogans = [
             'with which you may crush your enemies, see them driven before you, and to hear the lamentation of their women',

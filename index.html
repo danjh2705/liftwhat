@@ -26,6 +26,7 @@
       $select.append('<option value="no">Select a program...</option>')
       
       var types = liftApp.fetchRoutineTypes().sort();
+      var errors = false;
 
       $(types).each(function(i,type){
         var $optionGroup = $('<optgroup label="' + type + '"></optgroup>')
@@ -47,23 +48,9 @@
             var $input = $('<div class="input"></div>');
             $input.append('<label for="' + input.value + '">' + liftApp.valueToLabel(input.value) + '</label>');
 
-            buildCustomSelector = function(input) {
-              var $select = $('<select></select>');
-
-              if(input.type=='multiselect') {
-                $select.attr('multiple','multiple');
-                $(input.options).each(function(i,option){
-                  $select.append('<option value ="' + option + '"">' + option + '</option>');
-                });
-              }
-
-              return $select;
-            }
-
-            $select = (input.type == 'number') ? liftApp.buildWeightSelector() : buildCustomSelector(input);
-
-            $select.attr('id', input.value);
-            $input.append($select);
+            var $number = liftApp.buildWeightInput();
+            $number.attr('id', input.value);
+            $input.append($number);
             $('#inputs').append($input);
           });
 
@@ -71,24 +58,36 @@
             $(e.target).attr('disabled', 'disabled');
             var url = liftApp.fetchRoot();
             url += ('routines/' + selectedFile + '/?');
-            $('.input select').each(function(i, select){
-              var key = $(select).attr('id');
-              if ($(select).attr('multiple')) {
-                var value = [];
-                $(select).find('option:selected').each(function(x,option){
-                  value.push($(option).val()+',');
-                });
-              }
-              else {
-                var value = $(select).find('option:selected').val();
-              }
-              url += (key + '=' + value);
-              if (i < $('.input select').length - 1) { url += '&' }
+
+            $('.input input').each(function(i, input){
+
+              validateInput = function(value, input) {
+                value = parseInt(value);
+                if (!isNaN(value) && value > 0) {
+                  var key = $(input).attr('id');
+                  var value = $(input).val();
+                  url += (key + '=' + value);
+                  if (i < $('.input input').length - 1) { url += '&' }
+                }
+                else {
+                  $(input).parent('.input').addClass('error');
+                  errors = true;
+                }
+              };
+              validateInput($(input).val(),input);
             });
+
             if ($('#unit_toggle').find('.btn.active').attr('value')=='kilos') {
               url += '&u=' + $('#unit_toggle').find('.btn.active').attr('value');
             }
-            window.location.assign(url);
+
+            if (errors == true) {
+              $('#run').removeAttr('disabled');
+              errors = false;
+            }
+            else {
+              window.location.assign(url);
+            }
           });
 
           var $buttonWrapper = $('<div></div>').append($unitToggle).append($button)
