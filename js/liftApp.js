@@ -55,6 +55,23 @@
              ],
               type: 'Olympic Weightlifting'
             },
+            {name: 'Smolov Jr',
+             inputs: [
+                { type: "select",
+                  value: "which_lift",
+                  options: [
+                    'Squat',
+                    'Bench',
+                    'Deadlift'
+                  ]
+                },
+                {
+                  type: "number",
+                  value: "current_max"
+                }
+             ],
+              type: 'Powerlifting'
+            },
             {name: 'Korte 3x3',
              inputs: [
                 {
