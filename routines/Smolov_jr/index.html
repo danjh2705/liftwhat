@@ -42,10 +42,10 @@
 			$container.append('<p class="description"> This is the slightly less menacing little brother of the Smolov. Use it for squats, bench, or deadlifts. And, make sure to eat!</p>');
 			var $weeks = $('<div id="weeks"></div>');
 
-		    var increment = [0,15,25];
+		    var increment = [0,10,20];
 
 		    if (unit == 'kilos') {
-				function kiloMapper(increment) { return Math.round(increment/2.2046)+1; }
+				function kiloMapper(increment) { return Math.round(increment/2); }
 				increment = increment.map(kiloMapper);
 			}
 
