@@ -55,7 +55,7 @@
              ],
               type: 'Olympic Weightlifting'
             },
-            {name: 'Smolov Jr',
+            {name: 'Smolov jr',
              inputs: [
                 { type: "select",
                   value: "which_lift",
