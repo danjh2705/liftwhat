@@ -246,6 +246,12 @@
         return retStr.map(spacer);
     }
 
+    liftApp.round = function (number) {
+        number = number / 5;
+        number = Math.round(number) * 5;
+        return number;
+    }
+
     liftApp.setTableHeader = function ($table) {
         var $thead = $('<thead></thead>');
         $thead.append('<tr><th>Lift</th><th>Sets</th><th>Reps</th><th>Weight</th><th>%</th></tr>');

@@ -13,6 +13,7 @@
 	liftApp.localInit = function(){
 		if (liftApp.ARGV.current_max) {
 			var max = parseInt(liftApp.ARGV.current_max);
+			var round = liftApp.ARGV.r || false;
 			var unit = liftApp.ARGV.u || 'pounds';
 			unit = unit.split('/')[0];
 			var setsReps = [
@@ -35,11 +36,12 @@
 				if (i<4) {
 
 					for (x=0; x<3; x++){
+						var s = (round) ? liftApp.round(parseInt(max * .8)) : parseInt(max * .8);
 						$row = $('<tr></tr>');
 						$row.append('<td><em class="muted">Day ' + parseInt(x+1) + ':</em> Squat</td>');
 						$row.append('<td>' + setsReps[i-1][x][0] + '</td>');
 						$row.append('<td>' + setsReps[i-1][x][1] + '</td>');
-						$row.append('<td>' + parseInt(max * .8) + '</td>');
+						$row.append('<td>' + s + '</td>');
 						$row.append('<td>' + .8*100 + '</td>');
 						$tbody.append($row);
 					}
@@ -54,11 +56,12 @@
 					];
 
 					for (x=0; x<3; x++){
+						var s = (round) ? liftApp.round(parseInt(max * intensity[i-4][x])) : parseInt(max * intensity[i-4][x]);
 						$row = $('<tr></tr>');
 						$row.append('<td><em class="muted">Day ' + parseInt(x+1) + ':</em> Squat</td>');
 						$row.append('<td>' + setsReps[i-1][x][0] + '</td>');
 						$row.append('<td>' + setsReps[i-1][x][1] + '</td>');
-						$row.append('<td>' + parseInt(max * intensity[i-4][x]) + '</td>');
+						$row.append('<td>' + s + '</td>');
 						$row.append('<td>' + parseInt(100 * intensity[i-4][x]) + '</td>');
 						$tbody.append($row);
 					}

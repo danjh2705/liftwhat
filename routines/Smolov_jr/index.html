@@ -14,6 +14,7 @@
 		if (liftApp.ARGV.which_lift && liftApp.ARGV.current_max) {
 			var lift = liftApp.ARGV.which_lift;
 			var max = parseInt(liftApp.ARGV.current_max);
+			var round = liftApp.ARGV.r || false;
 			var unit = liftApp.ARGV.u || 'pounds';
 			unit = unit.split('/')[0];
 
@@ -62,13 +63,13 @@
 					$row.append('<td>' + scheme.sets + '</td>');
 					$row.append('<td>' + scheme.reps + '</td>');
 
-					var intensity = (typeof(scheme.intensity)=='string') ? '-' : parseInt((max + increment[i]) * scheme.intensity);
+					var intensity = (round) ? liftApp.round(parseInt((max + increment[i]) * scheme.intensity)) : parseInt((max + increment[i]) * scheme.intensity);
 
 					$row.append('<td>' + intensity + '</td>');
 
 					var incrementString = (increment[i] <= 1) ? '' : '<small>max+' + increment[i] + ' </small>'; 
 
-					intensity = (typeof(scheme.intensity)=='string') ? scheme.intensity : incrementString + parseInt(100 * scheme.intensity);
+					intensity = incrementString + parseInt(100 * scheme.intensity);
 
 					$row.append('<td>' + intensity + '</td>');
 					$tbody.append($row);
