@@ -118,6 +118,7 @@
               errors = false;
             }
             else {
+              window.onunload = function(){};
               window.location.assign(url);
             }
           });
