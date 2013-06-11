@@ -23,7 +23,7 @@
 			for(i=1; i<13; i++) {
 				$weeks.append('<h3 class="break"><span>Week ' + i + '</span></h3>');
 				var $table = $('<table></table>');
-				var $tbody = $('<tbody></tbody>');
+				var $tbody = $('<tbody class="rs-override"></tbody>');
 
 				if (i == 1) {
 					var d1 = (round) ? liftApp.round(parseInt(max * .7)) : parseInt(max * .7);

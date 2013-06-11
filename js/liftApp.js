@@ -21,7 +21,7 @@
                   value: "target_max"
                 }
             ],
-             type: 'Powerlifting'
+             type: 'Deadlift Specific'
             },
             {name: 'Magnusson Ortmayer Deadlift',
              inputs: [
@@ -29,7 +29,7 @@
                   value: "target_max"
                 }
             ],
-             type: 'Powerlifting'
+             type: 'Deadlift Specific'
             },
             {name: 'Russian Squat',
              inputs: [
@@ -37,7 +37,7 @@
                   value: "current_max"
                 }
              ],
-              type: 'Olympic Weightlifting'
+              type: 'Squat Specific'
             },
             {name: 'Smolov Squat: Part One',
              inputs: [
@@ -45,7 +45,7 @@
                   value: "current_max"
                 }
              ],
-              type: 'Olympic Weightlifting'
+              type: 'Squat Specific'
             },
             {name: 'Smolov Squat: Part Two',
              inputs: [
@@ -53,7 +53,7 @@
                   value: "current_max"
                 }
              ],
-              type: 'Olympic Weightlifting'
+              type: 'Squat Specific'
             },
             {name: 'Smolov jr',
              inputs: [
@@ -73,6 +73,23 @@
               type: 'Powerlifting'
             },
             {name: 'Korte 3x3',
+             inputs: [
+                {
+                  type: "number",
+                  value: "current_max_squat"
+                },
+                {
+                  type: "number",
+                  value: "current_max_bench"
+                },
+                {
+                  type: "number",
+                  value: "current_max_deadlift"
+                }
+             ],
+              type: 'Powerlifting'
+            },
+            {name: 'Sheiko 29',
              inputs: [
                 {
                   type: "number",
@@ -172,8 +189,9 @@
             }*/
         ],
         types: [
-            'Olympic Weightlifting',
-            'Powerlifting'
+            'Deadlift Specific',
+            'Powerlifting',
+            'Squat Specific'
         ]
     };
 

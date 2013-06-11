@@ -110,6 +110,9 @@ table tbody td {
 	text-align: right;
 }
 table tbody td:first-child { text-align: left; }
+table tbody.rs-override td:first-child { text-align: right; }
+table tbody.rs-override td:first-child[rowspan] { text-align: center; }
+
 table tbody td:last-child { color: #c3c3c3; font-style: italic; }
 table tbody td.group-instructions { text-align: center; background-color: white; }
 table tbody td.group-instructions span{
