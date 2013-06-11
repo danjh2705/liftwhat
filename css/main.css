@@ -130,7 +130,8 @@ table tbody td[rowspan] {
 	font-style: normal;
 }
 
-.btn-group.block { width: 100%; margin: 20px 0;}
+.btn-group.block { width: 100%; margin: 10px 0;}
+.btn-group.block + .btn-group.block { margin-top: 0;}
 .btn-group.block .btn { width: 50%; }
 .btn-group.block .btn.active { color: red; }
 
