@@ -32,6 +32,7 @@
       
       var types = liftApp.fetchRoutineTypes().sort();
       var errors = false;
+      var variableLift = false;
 
       $(types).each(function(i,type){
         var $optionGroup = $('<optgroup label="' + type + '"></optgroup>')
@@ -84,13 +85,10 @@
             var url = liftApp.fetchRoot();
             url += ('routines/' + selectedFile + '/?');
 
-            if ($('#round_toggle').find('.btn.active').attr('value')=='round') {
-              url += '&r=true&';
-            }
-
             $('.input select').each(function(i, select){
               var key = $(select).attr('id');
               var value = $(select).find('option:selected').val();
+              if (key == 'which_lift') { variableLift = value; }
               url += (key + '=' + value + '&');
             });
 
@@ -101,6 +99,12 @@
                 if (!isNaN(value) && value > 0) {
                   var key = $(input).attr('id');
                   url += (key + '=' + value);
+                  if (variableLift == false) {
+                    liftApp.setCookie(key, value);
+                  }
+                  else {
+                    liftApp.setCookie(key + '_' + variableLift, value)
+                  }
                   if (i < $('.input input').length - 1) { url += '&' }
                 }
                 else {
@@ -111,9 +115,13 @@
               validateInput($(input).val(),input);
             });
 
-            if ($('#unit_toggle').find('.btn.active').attr('value')=='kilos') {
-              url += '&u=' + $('#unit_toggle').find('.btn.active').attr('value');
-            }
+            var round = $('#round_toggle').find('.btn.active').attr('value');
+            if (round == 'round') { url += '&r=true&'; }
+            liftApp.setCookie('round', round);
+
+            var unit = $('#unit_toggle').find('.btn.active').attr('value');
+            if (unit == 'kilos') { url += '&u=' + unit; }
+            liftApp.setCookie('unit', unit);
 
             if (errors == true) {
               $('#run').removeAttr('disabled');

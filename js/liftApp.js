@@ -15,10 +15,10 @@
             {name: 'Coan Phillipi Deadlift',
              inputs: [
                 { type: "number",
-                  value: "current_max"
+                  value: "current_max_deadlift"
                 },
                 { type: "number",
-                  value: "target_max"
+                  value: "target_max_deadlift"
                 }
             ],
              type: 'Deadlift Specific'
@@ -26,7 +26,7 @@
             {name: 'Magnusson Ortmayer Deadlift',
              inputs: [
                 { type: "number",
-                  value: "target_max"
+                  value: "target_max_deadlift"
                 }
             ],
              type: 'Deadlift Specific'
@@ -34,7 +34,7 @@
             {name: 'Russian Squat',
              inputs: [
                 { type: "number",
-                  value: "current_max"
+                  value: "current_max_squat"
                 }
              ],
               type: 'Squat Specific'
@@ -42,7 +42,7 @@
             {name: 'Smolov Squat: Part One',
              inputs: [
                 { type: "number",
-                  value: "current_max"
+                  value: "current_max_squat"
                 }
              ],
               type: 'Squat Specific'
@@ -50,7 +50,7 @@
             {name: 'Smolov Squat: Part Two',
              inputs: [
                 { type: "number",
-                  value: "current_max"
+                  value: "current_max_squat"
                 }
              ],
               type: 'Squat Specific'
@@ -270,6 +270,10 @@
         return number;
     }
 
+    liftApp.setCookie = function (key,value) {
+        setCookie(key,value);
+    }
+
     liftApp.setTableHeader = function ($table) {
         var $thead = $('<thead></thead>');
         $thead.append('<tr><th>Lift</th><th>Sets</th><th>Reps</th><th>Weight</th><th>%</th></tr>');
@@ -413,6 +417,12 @@
             }
         }
         return retVals;
+    }
+
+    function setCookie(key, value) {
+        var exdate=new Date();
+        exdate.setDate(exdate.getDate() + 111111);
+        document.cookie=key+"="+value+"; expires=" + exdate.toUTCString();
     }
 
     function recover(response) {

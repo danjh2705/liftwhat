@@ -11,8 +11,8 @@
     <script src="../../js/liftApp.js"></script>
     <script>
 	liftApp.localInit = function(){
-		if (liftApp.ARGV.current_max) {
-			var max = parseInt(liftApp.ARGV.current_max);
+		if (liftApp.ARGV.current_max_squat) {
+			var max = parseInt(liftApp.ARGV.current_max_squat);
 			var round = liftApp.ARGV.r || false;
 			var unit = liftApp.ARGV.u || 'pounds';
 			unit = unit.split('/')[0];
