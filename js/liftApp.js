@@ -221,7 +221,9 @@
         }
         else {
             $footer = $('<div id="footer" class="home"></div>');
-            $footer.append('<p>Currently in <strong>BETA.</strong><br> Feedback or requests? <a href="mailto:admin@liftwhat.com">Email me!</a>');
+            $footer.append('<p>Currently in <strong>BETA.</strong></p>');
+            $footer.append('<p>Feedback or requests? <a href="mailto:admin@liftwhat.com">Email me!</a></p>');
+            $footer.append('<p class="updates">Remember my numbers. Sheiko 29. Bugs squished.</p>');
             $('#container').append($footer);
         }
     }
@@ -272,6 +274,14 @@
 
     liftApp.setCookie = function (key,value) {
         setCookie(key,value);
+    }
+
+    liftApp.getCookie = function () {
+        return getCookie();
+    }
+
+    liftApp.dumpCookie = function () {
+        dumpCookie();
     }
 
     liftApp.setTableHeader = function ($table) {
@@ -423,6 +433,28 @@
         var exdate=new Date();
         exdate.setDate(exdate.getDate() + 111111);
         document.cookie=key+"="+value+"; expires=" + exdate.toUTCString();
+    }
+
+    function getCookie() {
+        var cookie = document.cookie || "";
+        var retCookie = {};
+        cookie = cookie.split(';');
+        $(cookie).each(function(i,kv){
+            kv = kv.replace(' ', '');
+            kv = kv.split('=');
+            retCookie[kv[0]] = kv[1];
+        });
+        return retCookie;
+    }
+
+    function dumpCookie() {
+        var cookie = document.cookie || "";
+        cookie = cookie.split(';');
+        $(cookie).each(function(i,kv){
+            kv = kv.replace(' ', '');
+            kv = kv.split('=');
+            document.cookie = kv[0] + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        });
     }
 
     function recover(response) {

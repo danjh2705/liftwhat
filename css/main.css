@@ -39,6 +39,19 @@ p.week-description {
 	font-style: italic;
 }
 
+p.updates {
+	color: #b3b3b3;
+	font-size: .75em;
+	margin-top: 25px;
+	text-align: left;
+}
+
+p.updates:before {
+	display: block;
+	content: 'Latest Updates:';
+	font-weight: bold;
+}
+
 h3 { margin-top: 100px; position: relative; }
 h3:first-child { margin-top: 50px; }
 h3.break:before {
