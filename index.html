@@ -8,11 +8,13 @@
     <meta name="alexaVerifyID" content="UBGYHg83c-LMu5EAX2ArvNQNyFs" />
     <meta charset="UTF-8">
   </head>
-  <body>
+  <body></body>
     <script src="../../js/jquery.min.js"></script>
     <script src="../../js/liftApp.js"></script>
     <script>
     liftApp.localInit = function(){
+      var cookie = liftApp.getCookie();
+
       var $p1 = $('<p></p>').addClass('lead'), $p2 = $('<p></p>');
       $p1.html('LiftWhat? is a collection of kick ass lifting programs ' + liftApp.fetchSlogan() + '.');
       $p2.html('<small>Just pick a program, enter your info, and be sure to bookmark the result for less thinking, more lifting while <em>slaying it</em> in the gym!</small>');
@@ -21,17 +23,30 @@
       var $form = $('<div id="form"></div>');
       var $select = $('<select></select>');
       var $inputs = $('<div id="inputs"></div>');
+
+      var poundsActive = (cookie.unit == 'pounds' || cookie.unit != 'kilos') ? 'active' : '';
+      var kilosActive = (cookie.unit == 'kilos') ? 'active' : '';
+      var roundActive = (cookie.round == 'round') ? 'active' : '';
+      var rawActive = (cookie.round == 'raw' || cookie.round != 'round') ? 'active' : '';
+
       var $unitToggle = $('<div id="unit_toggle" class="btn-group block" data-toggle="buttons-radio"></div>');
-      $unitToggle.append('<button type="button" value="pounds" class="btn btn-large active">Pounds</button>');
-      $unitToggle.append('<button type="button" value="kilos" class="btn btn-large">Kilos</button>');
+      $unitToggle.append('<button type="button" value="pounds" class="btn btn-large ' + poundsActive + '">Pounds</button>');
+      $unitToggle.append('<button type="button" value="kilos" class="btn btn-large ' + kilosActive + '">Kilos</button>');
+
       var $roundToggle = $('<div id="round_toggle" class="btn-group block" data-toggle="buttons-radio"></div>');
-      $roundToggle.append('<button type="button" value="raw" class="btn btn-large active">I want it RAW!</button>');
-      $roundToggle.append('<button type="button" value="round" class="btn btn-large">Round that shit!</button>');
+      $roundToggle.append('<button type="button" value="raw" class="btn btn-large ' + rawActive + '">I want it RAW!</button>');
+      $roundToggle.append('<button type="button" value="round" class="btn btn-large ' + roundActive + '">Round that shit!</button>');
+
+      var $saveToggle = $('<div id="save_toggle" class="btn-group block" data-toggle="buttons-radio"></div>');
+      $saveToggle.append('<button type="button" value="false" class="btn btn-large active">Remember this!</button>');
+      $saveToggle.append('<button type="button" value="true" class="btn btn-large">Forget it!</button>');
+
       var $buttonContainer = $('<div id="button_container"></div>');
       $select.append('<option value="no">Select a program...</option>')
       
       var types = liftApp.fetchRoutineTypes().sort();
       var errors = false;
+      var variableLift = false;
 
       $(types).each(function(i,type){
         var $optionGroup = $('<optgroup label="' + type + '"></optgroup>')
@@ -69,6 +84,7 @@
             buildNumberInput = function(input) {
               var $number = liftApp.buildWeightInput();
               $number.attr('id', input.value);
+              if (cookie[input.value]) { $number.val(cookie[input.value]); }
               return $number;
             }
 
@@ -84,13 +100,10 @@
             var url = liftApp.fetchRoot();
             url += ('routines/' + selectedFile + '/?');
 
-            if ($('#round_toggle').find('.btn.active').attr('value')=='round') {
-              url += '&r=true&';
-            }
-
             $('.input select').each(function(i, select){
               var key = $(select).attr('id');
               var value = $(select).find('option:selected').val();
+              if (key == 'which_lift') { variableLift = value; }
               url += (key + '=' + value + '&');
             });
 
@@ -101,6 +114,12 @@
                 if (!isNaN(value) && value > 0) {
                   var key = $(input).attr('id');
                   url += (key + '=' + value);
+                  if (variableLift == false) {
+                    liftApp.setCookie(key, value);
+                  }
+                  else {
+                    liftApp.setCookie(key + '_' + variableLift, value)
+                  }
                   if (i < $('.input input').length - 1) { url += '&' }
                 }
                 else {
@@ -111,21 +130,27 @@
               validateInput($(input).val(),input);
             });
 
-            if ($('#unit_toggle').find('.btn.active').attr('value')=='kilos') {
-              url += '&u=' + $('#unit_toggle').find('.btn.active').attr('value');
-            }
+            var round = $('#round_toggle').find('.btn.active').attr('value');
+            if (round == 'round') { url += '&r=true&'; }
+            liftApp.setCookie('round', round);
+
+            var unit = $('#unit_toggle').find('.btn.active').attr('value');
+            if (unit == 'kilos') { url += '&u=' + unit; }
+            liftApp.setCookie('unit', unit);
 
             if (errors == true) {
               $('#run').removeAttr('disabled');
               errors = false;
             }
             else {
+              var dumpCookie = $('#save_toggle').find('.btn.active').attr('value');
+              if (dumpCookie == 'true') { liftApp.dumpCookie(); }
               window.onunload = function(){};
               window.location.assign(url);
             }
           });
 
-          var $buttonWrapper = $('<div></div>').append($unitToggle).append($roundToggle).append($button);
+          var $buttonWrapper = $('<div></div>').append($unitToggle).append($roundToggle).append($saveToggle).append($button);
 
           $('#button_container').html($buttonWrapper);
         }
@@ -141,5 +166,4 @@
       $container.append($form);
     };
     </script>
-  </body>
 </html>
