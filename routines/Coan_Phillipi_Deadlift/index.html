@@ -29,11 +29,11 @@
 				liftApp.setTableHeader($table);
 				var incrementer = .05;
 				if(i<5) {
-					var dl = (round) ? liftApp.round(parseInt(currentMax*(.85+incrementer*(i-1)))) : parseInt(currentMax*(.85+incrementer*(i-1)));
-					var sdl = (round) ? liftApp.round(parseInt(currentMax*(.65+incrementer*(i-1)))) : parseInt(currentMax*(.65+incrementer*(i-1)));
+					var dl = (round) ? liftApp.round(parseInt(currentMax*(.75+incrementer*(i-1)))) : parseInt(currentMax*(.75+incrementer*(i-1)));
+					var sdl = (round) ? liftApp.round(parseInt(currentMax*(.60+incrementer*(i-1)))) : parseInt(currentMax*(.60+incrementer*(i-1)));
 
-					$tbody.append('<tr><td>Deadlift</td><td>1</td><td>2</td><td>' + dl + '</td><td>' + parseInt(100*(.85+incrementer*(i-1))) + '</td></tr>');
-					$tbody.append('<tr><td>Speed Deadlift</td><td>8</td><td>3</td><td>' + sdl + '</td><td>' + parseInt(100*(.65+incrementer*(i-1))) + '</td></tr>');
+					$tbody.append('<tr><td>Deadlift</td><td>1</td><td>2</td><td>' + dl + '</td><td>' + parseInt(100*(.75+incrementer*(i-1))) + '</td></tr>');
+					$tbody.append('<tr><td>Speed Deadlift</td><td>8</td><td>3</td><td>' + sdl + '</td><td>' + parseInt(100*(.60+incrementer*(i-1))) + '</td></tr>');
 					$tbody.append('<tr><td class="group-instructions" colspan="5"><span>Three circuits of:</span></td></tr>');
 					$tbody.append('<tr><td>Stiff Leg Deadlift</td><td>1</td><td>8</td><td></td><td><em class="muted">Feel it out.</em></td></tr>');
 					$tbody.append('<tr><td>Bent Over Rows</td><td>1</td><td>8</td><td></td><td><em class="muted">Feel it out.</em></td></tr>');
@@ -42,11 +42,11 @@
 				}
 
 				else if (i<9) {
-					var dl = (round) ? liftApp.round(parseInt(currentMax*(.90+incrementer*(i-5)))) : parseInt(currentMax*(.90+incrementer*(i-5)));
-					var sdl = (round) ? liftApp.round(parseInt(currentMax*(.65+incrementer*(i-5)))) : parseInt(currentMax*(.65+incrementer*(i-5)));
+					var dl = (round) ? liftApp.round(parseInt(currentMax*(.80+incrementer*(i-5)))) : parseInt(currentMax*(.80+incrementer*(i-5)));
+					var sdl = (round) ? liftApp.round(parseInt(currentMax*(.55+incrementer*(i-5)))) : parseInt(currentMax*(.65+incrementer*(i-5)));
 					var ps = (round) ? liftApp.round(parseInt(currentMax*(.60+incrementer*(i-5)))) : parseInt(parseInt(currentMax*(.60+incrementer*(i-5))));
 
-					$tbody.append('<tr><td>Deadlift</td><td>1</td><td>2</td><td>' + dl + '</td><td>' + parseInt(100*(.90+incrementer*(i-5))) + '</td></tr>');
+					$tbody.append('<tr><td>Deadlift</td><td>1</td><td>2</td><td>' + dl + '</td><td>' + parseInt(100*(.80+incrementer*(i-5))) + '</td></tr>');
 					$tbody.append('<tr><td>Speed Deadlift</td><td>3</td><td>3</td><td>' + sdl + '</td><td>' + parseInt(100*(.65+incrementer*(i-5))) + '</td></tr>');
 					$tbody.append('<tr><td>Power Shrug</td><td>3</td><td>5</td><td>' + ps + '</td><td>' + parseInt(100*(.60+incrementer*(i-5))) + '</td></tr>');
 					$tbody.append('<tr><td>Stiff Leg Deadlift</td><td>3</td><td>5</td><td></td><td><em class="muted">Feel it out.</em></td></tr>');

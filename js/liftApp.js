@@ -223,7 +223,7 @@
             $footer = $('<div id="footer" class="home"></div>');
             $footer.append('<p>Currently in <strong>BETA.</strong></p>');
             $footer.append('<p>Feedback or requests? <a href="mailto:admin@liftwhat.com">Email me!</a></p>');
-            $footer.append('<p class="updates">Remember my numbers. Sheiko 29. Bugs squished.</p>');
+            $footer.append('<p class="updates">Bug fixes for Coan/Phillipi and Smolov.</p>');
             $('#container').append($footer);
         }
     }
