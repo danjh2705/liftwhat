@@ -105,6 +105,23 @@
                 }
              ],
               type: 'Powerlifting'
+            },
+            {name: 'Sheiko 30',
+             inputs: [
+                {
+                  type: "number",
+                  value: "current_max_squat"
+                },
+                {
+                  type: "number",
+                  value: "current_max_bench"
+                },
+                {
+                  type: "number",
+                  value: "current_max_deadlift"
+                }
+             ],
+              type: 'Powerlifting'
             }/*,
             {name: 'Brandon Lillys Cube Method',
              inputs: [
