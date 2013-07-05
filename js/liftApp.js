@@ -72,6 +72,15 @@
              ],
               type: 'Powerlifting'
             },
+            {name: 'Prilepins Chart',
+             inputs: [
+                {
+                  type: "number",
+                  value: "prilepin_training_max"
+                }
+             ],
+              type: 'Unspecified'
+            },
             {name: 'Korte 3x3',
              inputs: [
                 {
@@ -208,7 +217,8 @@
         types: [
             'Deadlift Specific',
             'Powerlifting',
-            'Squat Specific'
+            'Squat Specific',
+            'Unspecified'
         ]
     };
 

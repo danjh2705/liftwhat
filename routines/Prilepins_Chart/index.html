@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title>LiftWhat? - Prilepin's Chart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LiftWhat? presents Prilepin's Chart. This is an open ended chart that you can use to figure out what volume to lift in a given intensity range.">
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/liftApp.js"></script>
+    <script>
+	liftApp.localInit = function(){
+		if (liftApp.ARGV.prilepin_training_max) {
+			var max = parseInt(liftApp.ARGV.prilepin_training_max);
+			var round = liftApp.ARGV.r || false;
+			var unit = liftApp.ARGV.u || 'pounds';
+			unit = unit.split('/')[0];
+
+			var rows = [
+				{
+					start: 55,
+					end: 65,
+					rs: "3-6",
+					o: 24,
+					tr: "18-30"
+				},
+				{
+					start: 70,
+					end: 80,
+					rs: "3-6",
+					o: 18,
+					tr: "12-24"
+				},
+				{
+					start: 80,
+					end: 90,
+					rs: "2-4",
+					o: 15,
+					tr: "10-20"
+				},
+				{
+					start: 90,
+					end: 100,
+					rs: "1-2",
+					o: 4,
+					tr: "10"
+				},
+			]
+			$container.append('<h4> Current Prilepin Training Max is <span class="red">' + max + '</span> ' + unit + '.</h4>');
+			$container.append('<p class="description">This is an open ended chart that you can use to figure out what volume to lift in a given intensity range. I personally use this thing all the time.</p>');
+			var $weeks = $('<div id="weeks"></div>');
+			$weeks.append('<h3 class="break"><span>Prilepin\'s Chart</span></h3>');
+			var $table = $('<table></table>');
+			var $tbody = $('<tbody class="rs-override"></tbody>');
+
+			var $thead = $('<thead></thead>');
+        	$thead.append('<tr><th>Intensity %</th><th>Weight</th><th>Reps/Set</th><th>Optimal Reps</th><th>Rep Range</th></tr>');
+        	$table.append($thead);
+
+        	$(rows).each(function(i, row){
+        		var start = (round) ? liftApp.round(parseInt(max * (row.start/100))) : parseInt(max * (row.start/100));
+        		var end = (round) ? liftApp.round(parseInt(max * (row.end/100))) : parseInt(max * (row.end/100));
+        		var $tr = $('<tr></tr>');
+        		$tr.append('<td>' + row.start + ' - ' + row.end + '</td>');
+        		$tr.append('<td>' + start + ' - ' + end + '</td>');
+        		$tr.append('<td>' + row.rs + '</td>');
+        		$tr.append('<td>' + row.o + '</td>');
+        		$tr.append('<td>' + row.tr + '</td>');
+        		$tbody.append($tr);
+        	});
+					
+			$table.append($tbody);
+			$weeks.append($table);
+
+			$container.append($weeks);
+		}
+	};
+    </script>
+  </body>
+</html>
