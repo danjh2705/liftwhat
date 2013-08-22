@@ -105,6 +105,7 @@
 		    if (unit == 'kilos') {
 				function kiloMapper(increment) { return Math.round(increment/2.2046)+1; }
 				increment = increment.map(kiloMapper);
+				increment[0] = 0;
 			}
 
 			$(lastDays).each(function(i,day){
@@ -120,17 +121,17 @@
 					$row.append('<td>' + scheme.sets + '</td>');
 					$row.append('<td>' + scheme.reps + '</td>');
 
-					var intensity = (typeof(scheme.intensity)=='string') ? '-' : parseInt((max + increment[i]) * scheme.intensity);
+					var intensity = (typeof(scheme.intensity)=='string') ? '-' : parseInt((max  * scheme.intensity)+ increment[i]);
 
 					if(typeof(intensity)!='string') {
-						var intensity = (round) ? liftApp.round(parseInt((max + increment[i]) * scheme.intensity)) : parseInt((max + increment[i]) * scheme.intensity);
+						var intensity = (round) ? liftApp.round(parseInt((max * scheme.intensity) + increment[i])) : parseInt((max * scheme.intensity) + increment[i]);
 					}
 
 					$row.append('<td>' + intensity + '</td>');
 
-					var incrementString = (increment[i] <= 1) ? '' : '<small>max+' + increment[i] + ' </small>'; 
+					var incrementString = (increment[i] <= 1) ? '' : '<small>max*' + parseInt(100 * scheme.intensity) + '+' + increment[i] + ' </small>'; 
 
-					intensity = (typeof(scheme.intensity)=='string') ? scheme.intensity : incrementString + parseInt(100 * scheme.intensity);
+					intensity = (typeof(scheme.intensity)=='string') ? scheme.intensity : incrementString;
 
 					$row.append('<td>' + intensity + '</td>');
 					$tbody.append($row);

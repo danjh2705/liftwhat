@@ -250,7 +250,7 @@
             $footer = $('<div id="footer" class="home"></div>');
             $footer.append('<p>Currently in <strong>BETA.</strong></p>');
             $footer.append('<p>Feedback or requests? <a href="mailto:admin@liftwhat.com">Email me!</a></p>');
-            $footer.append('<p class="updates">7.19.13: Coan is operational...again.</p>');
+            $footer.append('<p class="updates">2013.8.21: Smolov minor bug. Polish. I need more time...</p>');
             $('#container').append($footer);
         }
     }
