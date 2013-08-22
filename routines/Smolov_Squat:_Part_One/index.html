@@ -129,7 +129,7 @@
 
 					$row.append('<td>' + intensity + '</td>');
 
-					var incrementString = (increment[i] <= 1) ? '' : '<small>max*' + parseInt(100 * scheme.intensity) + '+' + increment[i] + ' </small>'; 
+					var incrementString = (increment[i] <= 1) ? parseInt(100 * scheme.intensity) : '<small>max*' + parseInt(100 * scheme.intensity) + '+' + increment[i] + ' </small>'; 
 
 					intensity = (typeof(scheme.intensity)=='string') ? scheme.intensity : incrementString;
 
