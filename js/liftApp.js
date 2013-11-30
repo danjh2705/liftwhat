@@ -22,26 +22,14 @@
     }
 
     liftApp.setBase = function () {
-        $('body').prepend('<div id="container" class="container narrow"></div>')
-        var $masthead  = $('<div></div>').addClass('masthead');
-        var $title     = $('<h1 id="locale"></h1>');
-        $('#container').prepend($masthead.append($title));
+        var masthead = new EJS({url: root + '/templates/masthead.ejs'}).render();
+        $('body').prepend(masthead);
     };
 
     liftApp.setFooter = function () {
-        if (liftApp.locale != 'Welcome.') {
-            $footer = $('<div id="footer"></div>');
-            $footer.append('<a href="/">Wanna try another?</a>');
-            $('#container').append($footer);
-        }
-        else {
-            $footer = $('<div id="footer" class="home"></div>');
-            $footer.append('<p>Currently in <strong>BETA.</strong></p>');
-            $footer.append('<p>Feedback or requests? <a href="mailto:admin@liftwhat.com">Email me!</a></p>');
-            $footer.append('<p>Got a sec? Please take <a target="_blank" href="https://docs.google.com/forms/d/1TsGAvQcVRDdW7Zw97xDXRhVkesLm7SNvVURj9t2ULrU/viewform">this survey</a>. It is just <strong>two</strong> questions.');
-            $footer.append('<p class="updates">2013.11.05: Survey time!</p>');
-            $('#container').append($footer);
-        }
+        var footerURL = liftApp.locale === 'Welcome.' ? 'footer.ejs' : 'routine-footer.ejs';
+        var footer = new EJS({url: root + '/templates/' + footerURL}).render();
+        $('#container').append(footer);
     }
 
     liftApp.error = function (type) {
@@ -101,7 +89,7 @@
     }
 
     liftApp.setTableHeader = function ($table) {
-        var tableHead = new EJS({url: root + '/templates/table-head.ejs'}).render()
+        var tableHead = new EJS({url: root + '/templates/table-head.ejs'}).render();
         $table.append(tableHead);
     };
 
