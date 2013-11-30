@@ -101,9 +101,8 @@
     }
 
     liftApp.setTableHeader = function ($table) {
-        var $thead = $('<thead></thead>');
-        $thead.append('<tr><th>Lift</th><th>Sets</th><th>Reps</th><th>Weight</th><th>%</th></tr>');
-        $table.append($thead);
+        var tableHead = new EJS({url: root + '/templates/table-head.ejs'}).render()
+        $table.append(tableHead);
     };
 
     liftApp.buildWeightSelector = function () {
@@ -186,6 +185,7 @@
     function buildIncludes() {
         var jsIncludes =  [
             'bootstrap/js/bootstrap.min.js',
+            'js/ejs.js',
             'js/main.js',
             'js/routines.js'
         ];
