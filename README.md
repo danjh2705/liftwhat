@@ -20,7 +20,7 @@ I apologize in advance...it is sort of a mess. First things first--I am refactor
 
 This will make addin and maintaining routines WAY easier and allow for other contributors, like yourself.
 
-Fork, branch, and issue a pull request. I'd like to hammer out all the current issues. They are all based on user feedback.
+Fork, branch off of Develop, codecodecode, then issue a pull request. I'd like to hammer out all the current issues. They are all based on user feedback.
 
 All this is running on S3, so we don't have a backend. Any enhancements you want to bang out need to keep this in mind.
 
