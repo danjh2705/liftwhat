@@ -249,9 +249,9 @@
         else {
             $footer = $('<div id="footer" class="home"></div>');
             $footer.append('<p>Currently in <strong>BETA.</strong></p>');
-            $footer.append('<p>Feedback or requests? <a href="mailto:admin@liftwhat.com">Email me!</a></p>');
-            $footer.append('<p>Got a sec? Please take <a target="_blank" href="https://docs.google.com/forms/d/1TsGAvQcVRDdW7Zw97xDXRhVkesLm7SNvVURj9t2ULrU/viewform">this survey</a>. It is just <strong>two</strong> questions.');
-            $footer.append('<p class="updates">2013.11.05: Survey time!</p>');
+            $footer.append('<p>Thanks for the feedback!</p>');
+            $footer.append('<p>I am hacking away at it. <a href="https://github.com/scottt2/liftwhat">You can too!</a>.</p>');
+            $footer.append('<p class="updates">2013.12.27: Open sourced. Updates coming soon...</p>');
             $('#container').append($footer);
         }
     }
