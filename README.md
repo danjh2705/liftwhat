@@ -1,4 +1,4 @@
-liftwhat
+About LiftWhat
 ========
 
 LiftWhat is an attempt at making the most simple routine app ever.
@@ -22,10 +22,12 @@ This will make addin and maintaining routines WAY easier and allow for other con
 
 Fork, branch, and issue a pull request. I'd like to hammer out all the current issues. They are all based on user feedback.
 
+All this is running on S3, so we don't have a backend. Any enhancements you want to bang out need to keep this in mind.
+
 Contact
 =======
 
-Any questions, feel free to email me.
+Any questions, feel free to contact me on Git or admin@liftwhat.com.
 
 
 Kick ass.
